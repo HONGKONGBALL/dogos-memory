@@ -1,0 +1,17 @@
+{
+  "timeout_ms": 2000,
+  "dogs": [
+    {
+      "dog_id": "dog_a",
+      "adapter_id": "adapter-a",
+      "url": "ws://127.0.0.1:19091",
+      "expected_robot_id": "vbot-aaaaaaaaaaaaaaaa"
+    },
+    {
+      "dog_id": "dog_b",
+      "adapter_id": "adapter-b",
+      "url": "ws://127.0.0.1:19092",
+      "expected_robot_id": "vbot-bbbbbbbbbbbbbbbb"
+    }
+  ]
+}

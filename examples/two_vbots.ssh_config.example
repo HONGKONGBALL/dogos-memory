@@ -1,0 +1,17 @@
+# Copy to data/two_vbots.ssh_config, replace both IPs, and keep the aliases fixed.
+# If both robots currently expose the same IP, put them on one LAN with distinct
+# addresses before starting two tunnels; two identical routes cannot be isolated.
+
+Host vbot-a
+  HostName REPLACE_WITH_DOG_A_IP
+  User vbot
+  HostKeyAlias dogos-vbot-a
+  StrictHostKeyChecking accept-new
+  ConnectTimeout 5
+
+Host vbot-b
+  HostName REPLACE_WITH_DOG_B_IP
+  User vbot
+  HostKeyAlias dogos-vbot-b
+  StrictHostKeyChecking accept-new
+  ConnectTimeout 5

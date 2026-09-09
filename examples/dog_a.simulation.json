@@ -1,0 +1,7 @@
+{
+  "dog_id": "dog_a",
+  "name": "A",
+  "personality": "谨慎",
+  "familiar_threshold": 60,
+  "mode": "simulation"
+}

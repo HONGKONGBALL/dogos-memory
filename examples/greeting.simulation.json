@@ -1,0 +1,14 @@
+{
+  "memory_id": "example:round-1:greeting_completed",
+  "session_id": "example:round-1",
+  "peer_id": "dog_b",
+  "kind": "event",
+  "event_type": "greeting_completed",
+  "content": "[模拟] B 向我打招呼，我回应了它。",
+  "occurred_at_ms": 1000,
+  "source": "simulation",
+  "result": "completed",
+  "importance": 5,
+  "affinity_delta": 35,
+  "evidence_ids": []
+}

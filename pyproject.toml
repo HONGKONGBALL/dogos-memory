@@ -1,0 +1,63 @@
+[project]
+name = "dogos-memory"
+version = "0.3.0"
+description = "Persistent memory and a bounded two-Vbot DogOS interaction demo"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic>=2.10,<3",
+    "typer>=0.12,<1",
+    "typing-extensions>=4.12",
+    "websockets>=15,<16",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "ruff>=0.8", "basedpyright>=1.21"]
+
+[tool.uv]
+package = false
+
+[tool.basedpyright]
+typeCheckingMode = "all"
+pythonVersion = "3.10"
+include = ["dogos_memory", "dogos_demo", "tests"]
+reportUnusedCallResult = "warning"
+# Exhaustive enum matches intentionally end with assert_never; basedpyright
+# otherwise reports the required defensive branch itself as unreachable.
+reportUnnecessaryComparison = "none"
+reportUnreachable = "none"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["ALL"]
+allowed-confusables = ["，"]
+# Error constructors carry structured codes, not a preformatted message.
+# Small type-only imports stay local for readable examples/runtime introspection.
+ignore = ["COM812", "ISC001", "D203", "D213", "CPY001", "EM101", "TC003"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101", "ARG", "PLR2004", "D", "INP001"]
+# Fixed interpreter/module arguments exercise our own CLI without a shell.
+"tests/test_cli.py" = ["S603"]
+"tests/test_connection_cli.py" = ["S603"]
+"tests/test_demo_cli.py" = ["S603"]
+"tests/test_tunnel_script.py" = ["S603"]
+# Pydantic resolves these branded aliases while constructing models at runtime.
+"dogos_demo/connection_models.py" = ["TC001"]
+"dogos_demo/models.py" = ["TC001"]
+"dogos_demo/rosbridge_identity.py" = ["TC001"]
+"dogos_demo/session_models.py" = ["TC001"]
+# These are intentionally fixed, documented demonstration parameters.
+"dogos_memory/demo.py" = ["PLR2004"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-config", "--strict-markers"]
+filterwarnings = ["error"]
+pythonpath = ["."]
