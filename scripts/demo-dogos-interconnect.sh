@@ -27,12 +27,12 @@ case "$mode" in
   simulation)
     echo "[SIMULATION] Starting two local DogOS/MCP identities; no robot is controlled." >&2
     DOGOS_MEMORY_SOURCE="$DOGOS_ROOT" \
-      exec node "$ROOT/native_agent/dogos_mcp/smoke_test.mjs"
+      exec node "$ROOT/packages/native_agent/dogos_mcp/smoke_test.mjs"
     ;;
   simulation-serve)
     echo "[SIMULATION] dog_a=http://127.0.0.1:8768/mcp dog_b=http://127.0.0.1:8769/mcp" >&2
     DOGOS_MEMORY_SOURCE="$DOGOS_ROOT" DOGOS_MODE=simulation \
-      exec "$ROOT/native_agent/dogos_mcp/start_pair.sh"
+      exec "$ROOT/packages/native_agent/dogos_mcp/start_pair.sh"
     ;;
   physical-inventory)
     echo "[PHYSICAL INVENTORY] Requires two labeled Vbots with distinct configured HostName values." >&2

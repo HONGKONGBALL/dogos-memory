@@ -3,7 +3,7 @@ import json
 import subprocess
 from pathlib import Path
 
-CALLER = Path(__file__).resolve().parents[1] / 'scripts' / 'call-datou.mjs'
+CALLER = Path(__file__).resolve().parents[2] / 'scripts' / 'call-datou.mjs'
 
 BEHAVIORS = {
     'greet': {'rgb':(90,150,200),'emotions':('say_hi','WINK'),'angles':(0.0,.04),'sound':False},

@@ -8,8 +8,8 @@ from pathlib import Path
 import subprocess
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-SMOKE_TEST = PROJECT_ROOT / "native_agent" / "mcp_probe" / "smoke_test.mjs"
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+SMOKE_TEST = PROJECT_ROOT / "packages" / "native_agent" / "mcp_probe" / "smoke_test.mjs"
 
 
 def test_mcp_probe_protocol_smoke() -> None:

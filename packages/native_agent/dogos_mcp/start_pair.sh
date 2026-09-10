@@ -2,7 +2,7 @@
 set -eu
 
 server_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-project_root=$(CDPATH= cd -- "$server_dir/../.." && pwd)
+project_root=$(CDPATH= cd -- "$server_dir/../../.." && pwd)
 dogos_source=${DOGOS_MEMORY_SOURCE:-"$project_root"}
 data_dir=${DOGOS_PAIR_DATA_DIR:-"$dogos_source/data/mcp-pair"}
 python_bin=${DOGOS_PYTHON:-python3}

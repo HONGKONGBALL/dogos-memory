@@ -18,7 +18,9 @@ from dogos_demo.connection_models import (
 )
 from dogos_demo.rosbridge_identity import VbotIdentityProbe
 
-BRIDGE_SOURCE: Final = Path(__file__).parents[1] / "robot_side" / "vbot_identity_bridge.py"
+BRIDGE_SOURCE: Final = (
+    Path(__file__).parents[1] / "integrations" / "robot_side" / "vbot_identity_bridge.py"
+)
 
 
 class IdentityArgs(BaseModel):

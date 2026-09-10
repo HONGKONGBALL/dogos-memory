@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -10,13 +11,19 @@ from typing import Final
 from dogos_demo.session_models import ActionName, PairSnapshot, SessionSummary
 
 PROJECT: Final = Path(__file__).parents[1]
+PACKAGE_ROOT: Final = PROJECT / "packages"
 
 
 def run_cli(*arguments: str) -> subprocess.CompletedProcess[str]:
+    environment = os.environ.copy()
+    environment["PYTHONPATH"] = os.pathsep.join(
+        filter(None, (str(PACKAGE_ROOT), environment.get("PYTHONPATH")))
+    )
     return subprocess.run(
         [sys.executable, "-m", "dogos_demo", *arguments],
         cwd=PROJECT,
         capture_output=True,
+        env=environment,
         text=True,
         timeout=10,
         check=False,

@@ -9,11 +9,15 @@ import sys
 from pathlib import Path
 from typing import Any
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
+REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
+PACKAGE_ROOT = REPOSITORY_ROOT / "packages"
+if str(PACKAGE_ROOT) not in sys.path:
+    sys.path.insert(0, str(PACKAGE_ROOT))
 
-dogos_source = Path(os.environ.get("DOGOS_MEMORY_SOURCE", PROJECT_ROOT))
+dogos_source = Path(os.environ.get("DOGOS_MEMORY_SOURCE", REPOSITORY_ROOT))
+dogos_packages = dogos_source / "packages"
+if dogos_packages.is_dir():
+    dogos_source = dogos_packages
 if str(dogos_source) not in sys.path:
     sys.path.insert(0, str(dogos_source))
 

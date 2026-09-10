@@ -3,7 +3,7 @@
 import { createRequire } from "node:module";
 
 const requireFromProject = createRequire(
-  new URL("../../package.json", import.meta.url),
+  new URL("../../../package.json", import.meta.url),
 );
 const { Client } = requireFromProject("@modelcontextprotocol/sdk/client/index.js");
 const { StreamableHTTPClientTransport } = requireFromProject(

@@ -8,8 +8,8 @@
     "node": ">=20"
   },
   "scripts": {
-    "test:mcp": "node native_agent/mcp_probe/smoke_test.mjs",
-    "test:dogos-mcp": "node native_agent/dogos_mcp/smoke_test.mjs"
+    "test:mcp": "node packages/native_agent/mcp_probe/smoke_test.mjs",
+    "test:dogos-mcp": "node packages/native_agent/dogos_mcp/smoke_test.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",

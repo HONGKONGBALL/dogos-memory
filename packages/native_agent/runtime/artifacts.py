@@ -22,7 +22,11 @@ MAX_X5_WRAPPER_BYTES = 256 * 1024
 
 
 def _root() -> Path:
-    return Path(__file__).resolve().parents[2]
+    return Path(__file__).resolve().parents[3]
+
+
+def _python_root() -> Path:
+    return _root() / "packages"
 
 
 def _hash(path: Path) -> str:
@@ -46,17 +50,16 @@ def _write_archive(
     main_module: str,
     source_files: Iterable[Path],
 ) -> None:
-    project = _root()
     if output.exists() or output.is_symlink():
         raise IdentityError("output_exists", str(output))
     output.parent.mkdir(parents=True, exist_ok=True)
     entries: dict[str, bytes] = {
-        "__main__.py": (
-            f"from {main_module} import main\nraise SystemExit(main())\n"
-        ).encode("utf-8")
+        "__main__.py": (f"from {main_module} import main\nraise SystemExit(main())\n").encode(
+            "utf-8"
+        )
     }
     for source in source_files:
-        relative = source.relative_to(project).as_posix()
+        relative = source.relative_to(_python_root()).as_posix()
         entries[relative] = source.read_bytes()
     with zipfile.ZipFile(output, "x", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for name in sorted(entries):
@@ -69,9 +72,9 @@ def _write_archive(
 
 def build_s100_admin(output: Path) -> dict[str, object]:
     project = _root()
-    files = [project / "native_agent/__init__.py"]
-    files += _python_files(project / "native_agent/identity")
-    files += _python_files(project / "native_agent/runtime")
+    files = [project / "packages/native_agent/__init__.py"]
+    files += _python_files(project / "packages/native_agent/identity")
+    files += _python_files(project / "packages/native_agent/runtime")
     _write_archive(
         output,
         main_module="native_agent.runtime.s100_admin",
@@ -82,12 +85,12 @@ def build_s100_admin(output: Path) -> dict[str, object]:
 
 def _x5_archive(path: Path) -> None:
     project = _root()
-    files = [project / "native_agent/__init__.py"]
-    files += _python_files(project / "native_agent/identity")
+    files = [project / "packages/native_agent/__init__.py"]
+    files += _python_files(project / "packages/native_agent/identity")
     files += [
-        project / "native_agent/runtime/__init__.py",
-        project / "native_agent/runtime/gates.py",
-        project / "native_agent/runtime/x5_runner.py",
+        project / "packages/native_agent/runtime/__init__.py",
+        project / "packages/native_agent/runtime/gates.py",
+        project / "packages/native_agent/runtime/x5_runner.py",
     ]
     _write_archive(
         path,
@@ -108,8 +111,7 @@ def build_x5_capsule(output: Path) -> dict[str, object]:
     payload_sha = hashlib.sha256(payload).hexdigest()
     encoded = base64.b64encode(payload).decode("ascii")
     lines = "\n".join(
-        f'    "{encoded[index:index + 96]}"'
-        for index in range(0, len(encoded), 96)
+        f'    "{encoded[index : index + 96]}"' for index in range(0, len(encoded), 96)
     )
     wrapper = f'''#!/usr/bin/env python3
 import base64
@@ -166,7 +168,7 @@ def _deterministic_created_at(source_dir: Path) -> datetime:
         for filename in FILE_SPECS
         if filename != "AGENTS.md" and (source_dir / filename).is_file()
     ]
-    candidates.append(_root() / "native_agent/identity/templates/AGENTS.md")
+    candidates.append(_root() / "packages/native_agent/identity/templates/AGENTS.md")
     latest = max(path.stat().st_mtime for path in candidates)
     now = datetime.now(timezone.utc).timestamp()
     if latest > now + 300:

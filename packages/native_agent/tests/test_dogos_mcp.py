@@ -8,8 +8,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-SMOKE_TEST = PROJECT_ROOT / "native_agent" / "dogos_mcp" / "smoke_test.mjs"
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+SMOKE_TEST = PROJECT_ROOT / "packages" / "native_agent" / "dogos_mcp" / "smoke_test.mjs"
 DEFAULT_DOGOS = PROJECT_ROOT
 
 

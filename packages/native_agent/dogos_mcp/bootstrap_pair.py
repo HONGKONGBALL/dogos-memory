@@ -15,7 +15,9 @@ def main() -> None:
     parser.add_argument("--directory", type=Path, required=True)
     parser.add_argument("--mode", choices=("simulation", "live"), default="simulation")
     args = parser.parse_args()
-    sys.path.insert(0, str(args.dogos_source.resolve(strict=True)))
+    source = args.dogos_source.resolve(strict=True)
+    package_root = source / "packages"
+    sys.path.insert(0, str(package_root if package_root.is_dir() else source))
     from dogos_memory.models import DogId, Profile  # noqa: PLC0415
     from dogos_memory.store import MemoryStore  # noqa: PLC0415
 

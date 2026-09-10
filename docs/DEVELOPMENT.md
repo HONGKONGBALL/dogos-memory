@@ -10,8 +10,9 @@ npm run test:mcp
 npm run test:dogos-mcp
 ```
 
-Python 代码默认从仓库根目录导入。MCP 测试会启动临时回环服务并清理临时数据库，不需要
-机器人、ROS 或云模型。
+Python 包位于 `packages/`，应用位于 `apps/`。执行 CLI 时使用
+`./scripts/run-python.sh -m <module>`；pytest 已在配置中加入这两个源码根目录。MCP 测试会
+启动临时回环服务并清理临时数据库，不需要机器人、ROS 或云模型。
 
 ## 公开仓库前
 

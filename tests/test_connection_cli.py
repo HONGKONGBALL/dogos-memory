@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -21,14 +22,20 @@ from dogos_demo.rosbridge_identity import (
 from dogos_demo.vbot_identity_core import RobotHardwareId
 
 PROJECT: Final = Path(__file__).parents[1]
+PACKAGE_ROOT: Final = PROJECT / "packages"
 SOCKET_ADDRESS: Final = TypeAdapter(tuple[str, int])
 
 
 def run_cli(*arguments: str) -> subprocess.CompletedProcess[str]:
+    environment = os.environ.copy()
+    environment["PYTHONPATH"] = os.pathsep.join(
+        filter(None, (str(PACKAGE_ROOT), environment.get("PYTHONPATH")))
+    )
     return subprocess.run(
         [sys.executable, "-m", "dogos_demo", *arguments],
         cwd=PROJECT,
         capture_output=True,
+        env=environment,
         text=True,
         timeout=10,
         check=False,

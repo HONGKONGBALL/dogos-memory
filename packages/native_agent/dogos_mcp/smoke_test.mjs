@@ -10,10 +10,10 @@ import { once } from "node:events";
 import { fileURLToPath } from "node:url";
 
 const directory = fileURLToPath(new URL(".", import.meta.url));
-const projectRoot = fileURLToPath(new URL("../..", import.meta.url));
+const projectRoot = fileURLToPath(new URL("../../..", import.meta.url));
 const dogosSource = process.env.DOGOS_MEMORY_SOURCE || projectRoot;
 const requireFromProject = createRequire(
-  new URL("../../package.json", import.meta.url),
+  new URL("../../../package.json", import.meta.url),
 );
 const { Client } = requireFromProject("@modelcontextprotocol/sdk/client/index.js");
 const { StreamableHTTPClientTransport } = requireFromProject(

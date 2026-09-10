@@ -20,7 +20,8 @@ package = false
 [tool.basedpyright]
 typeCheckingMode = "all"
 pythonVersion = "3.10"
-include = ["dogos_memory", "dogos_demo", "tests"]
+include = ["packages", "apps", "integrations", "tests"]
+extraPaths = ["packages", "apps"]
 reportUnusedCallResult = "warning"
 # Exhaustive enum matches intentionally end with assert_never; basedpyright
 # otherwise reports the required defensive branch itself as unreachable.
@@ -46,18 +47,18 @@ ignore = ["COM812", "ISC001", "D203", "D213", "CPY001", "EM101", "TC003"]
 "tests/test_demo_cli.py" = ["S603"]
 "tests/test_tunnel_script.py" = ["S603"]
 # Pydantic resolves these branded aliases while constructing models at runtime.
-"dogos_demo/connection_models.py" = ["TC001"]
-"dogos_demo/models.py" = ["TC001"]
-"dogos_demo/rosbridge_identity.py" = ["TC001"]
-"dogos_demo/session_models.py" = ["TC001"]
+"packages/dogos_demo/connection_models.py" = ["TC001"]
+"packages/dogos_demo/models.py" = ["TC001"]
+"packages/dogos_demo/rosbridge_identity.py" = ["TC001"]
+"packages/dogos_demo/session_models.py" = ["TC001"]
 # These are intentionally fixed, documented demonstration parameters.
-"dogos_memory/demo.py" = ["PLR2004"]
+"packages/dogos_memory/demo.py" = ["PLR2004"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.pytest.ini_options]
-testpaths = ["tests", "native_agent/tests", "companion/tests", "demo_choreo/tests"]
+testpaths = ["tests", "packages/native_agent/tests", "apps/companion/tests", "apps/demo_choreo/tests"]
 addopts = ["-ra", "--strict-config", "--strict-markers"]
 filterwarnings = ["error"]
-pythonpath = ["."]
+pythonpath = ["packages", "apps"]

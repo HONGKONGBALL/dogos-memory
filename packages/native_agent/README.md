@@ -13,8 +13,9 @@
 - 原厂 ROS 2 与 RCP/DAG 负责身体执行；模型不生成关节轨迹。
 - DogOS 只保存有来源的社交经历。失败、仅收到 ack 或未经确认的动作不能增加关系。
 
-完整产品阶段和验收 Gate 见 [`../docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md)。
-本轮自动化证据见 [`VALIDATION-REPORT.md`](VALIDATION-REPORT.md)，真实设备停止线见 [`SECURITY-READINESS.md`](SECURITY-READINESS.md)。
+完整产品阶段和验收 Gate 见 [`../../docs/ARCHITECTURE.md`](../../docs/ARCHITECTURE.md)，目录约定见
+[`../../docs/REPOSITORY_LAYOUT.md`](../../docs/REPOSITORY_LAYOUT.md)。真实设备仍需按根目录
+README 所列 Gate 逐项验证。
 
 ## 模块
 
@@ -84,15 +85,16 @@ DogOS 是可选依赖并采用懒加载。模块可在未安装 DogOS 时导入�
 从仓库根目录运行：
 
 ```sh
-PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider native_agent/tests
-node native_agent/mcp_probe/smoke_test.mjs
-node native_agent/dogos_mcp/smoke_test.mjs
+PYTHONDONTWRITEBYTECODE=1 uv run pytest -q -p no:cacheprovider packages/native_agent/tests
+npm run test:mcp
+npm run test:dogos-mcp
 ```
 
 MCP 测试使用仓库根目录 `package.json` 中声明的 MCP SDK 与 Zod。缺少依赖时，探针会明确
 失败，不会自动安装软件。
 
-从合成 SOUL 开始运行完整假设备流程，见 [`DEPLOYMENT-RUNBOOK.md`](DEPLOYMENT-RUNBOOK.md)。
+请用合成 SOUL 先完成本地假设备流程；真实 X5 仅能在明确配置地址和可信 SSH host key 后，
+按根目录 README 的设备 Gate 执行。
 
 ## 插线启动
 
@@ -102,7 +104,8 @@ MCP 测试使用仓库根目录 `package.json` 中声明的 MCP SDK 与 Zod。�
 ./scripts/start-native-agent.sh --identity-dir /ABS/PATH/TO/identity --dog-id datou
 ```
 
-该命令使用狗本体 `/agent/enable`、`/speech_control` 和原厂唤醒链，不需要手机。安装阶段可以在充电时运行；激活阶段默认要求至少 40%、拔掉充电器、无 fault、机器静止且云网络可用。详见 [`PLUG-AND-RUN.md`](PLUG-AND-RUN.md)。
+该命令使用狗本体 `/agent/enable`、`/speech_control` 和原厂唤醒链，不需要手机。安装阶段可以在
+充电时运行；激活阶段默认要求至少 40%、拔掉充电器、无 fault、机器静止且云网络可用。
 
 ## 状态边界
 

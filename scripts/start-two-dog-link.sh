@@ -161,11 +161,11 @@ for host in vbot-a vbot-b; do
   remote_root="/userdata/vbot/dogos-identity/$release"
   ssh -F "$SSH_CONFIG" -S "$socket" "$host" "mkdir -p '$remote_root/dogos_demo'"
   scp -q -F "$SSH_CONFIG" -o ControlPath="$socket" \
-    "$DOGOS_ROOT/robot_side/vbot_identity_bridge.py" "$host:$remote_root/"
+    "$DOGOS_ROOT/integrations/robot_side/vbot_identity_bridge.py" "$host:$remote_root/"
   scp -q -F "$SSH_CONFIG" -o ControlPath="$socket" \
-    "$DOGOS_ROOT/dogos_demo/__init__.py" \
-    "$DOGOS_ROOT/dogos_demo/vbot_identity_core.py" \
-    "$DOGOS_ROOT/dogos_demo/vbot_identity_protocol.py" \
+    "$DOGOS_ROOT/packages/dogos_demo/__init__.py" \
+    "$DOGOS_ROOT/packages/dogos_demo/vbot_identity_core.py" \
+    "$DOGOS_ROOT/packages/dogos_demo/vbot_identity_protocol.py" \
     "$host:$remote_root/dogos_demo/"
   ssh -F "$SSH_CONFIG" -S "$socket" "$host" \
     "cd /userdata/vbot/dogos-identity && chmod 755 '$release/vbot_identity_bridge.py' && ln -sfn '$release' current"
@@ -237,7 +237,8 @@ for port in 19091 19092; do
 done
 
 set +e
-(cd "$DOGOS_ROOT" && uv run python -m dogos_demo connect-check --config "$CONNECTION_CONFIG") >"$report_file"
+(cd "$DOGOS_ROOT" && PYTHONPATH="$DOGOS_ROOT/packages${PYTHONPATH:+:$PYTHONPATH}" \
+  uv run python -m dogos_demo connect-check --config "$CONNECTION_CONFIG") >"$report_file"
 connect_status=$?
 set -e
 cat "$report_file"
@@ -283,6 +284,6 @@ echo "Two hardware identities are ready. Starting text/memory MCP endpoints in s
 DOGOS_MEMORY_SOURCE="$DOGOS_ROOT" \
 DOGOS_PAIR_DATA_DIR="$DOGOS_ROOT/data/mcp-pair" \
 DOGOS_MODE=simulation \
-  "$ROOT/native_agent/dogos_mcp/start_pair.sh" &
+  "$ROOT/packages/native_agent/dogos_mcp/start_pair.sh" &
 mcp_pid=$!
 wait "$mcp_pid"

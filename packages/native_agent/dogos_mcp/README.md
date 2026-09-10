@@ -18,13 +18,13 @@ a body action. The server binds to `127.0.0.1` only.
 Run the complete two-endpoint protocol and persistence test:
 
 ```bash
-node native_agent/dogos_mcp/smoke_test.mjs
+npm run test:dogos-mcp
 ```
 
 Start persistent local endpoints:
 
 ```bash
-./native_agent/dogos_mcp/start_pair.sh
+./packages/native_agent/dogos_mcp/start_pair.sh
 # dog_a: http://127.0.0.1:8768/mcp
 # dog_b: http://127.0.0.1:8769/mcp
 ```

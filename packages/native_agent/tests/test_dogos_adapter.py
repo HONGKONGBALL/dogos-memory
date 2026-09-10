@@ -14,8 +14,11 @@ import pytest
 sys.dont_write_bytecode = True
 
 _DELIVERED_DOGOS = Path(
-    os.environ.get("DOGOS_MEMORY_SOURCE", str(Path(__file__).resolve().parents[2]))
+    os.environ.get("DOGOS_MEMORY_SOURCE", str(Path(__file__).resolve().parents[3]))
 )
+_DELIVERED_PACKAGES = _DELIVERED_DOGOS / "packages"
+if _DELIVERED_PACKAGES.is_dir():
+    _DELIVERED_DOGOS = _DELIVERED_PACKAGES
 if _DELIVERED_DOGOS.is_dir():
     sys.path.insert(0, str(_DELIVERED_DOGOS))
 

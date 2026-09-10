@@ -4,7 +4,7 @@ import math
 import unittest
 from pathlib import Path
 
-source=Path(__file__).resolve().parents[2]/'scripts'/'agenticros_bridge.py'
+source=Path(__file__).resolve().parents[3]/'scripts'/'agenticros_bridge.py'
 tree=ast.parse(source.read_text())
 fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='validate_call')
 namespace={'math':math,'READ_SERVICES':set(), 'RESOURCES':{'emotions':{'happy':4},'sounds':['happy_short','confirm']}}

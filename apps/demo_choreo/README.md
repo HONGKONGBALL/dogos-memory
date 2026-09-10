@@ -3,16 +3,13 @@
 这是一条独立的 hackathon 演示路径：固定触发映射到固定动作流程。dry-run 与受限 live driver 都已实现；当前设备正在充电且没有已认证会话，只运行了离线验证，尚未执行新的实机 routine。
 
 ```bash
-cd /path/to/dogos
-python3 -m demo_choreo validate
-python3 -m demo_choreo list
-python3 -m demo_choreo list --persona xiaoman
-python3 -m demo_choreo match '我回来了！' --persona xiaoman
-python3 -m demo_choreo run xiaoman_owner_returns --battery 80 --operator-present
-python3 -m demo_choreo.operator_console
-python3 -m demo_choreo.operator_console --once 4
-./scripts/start-xiaoman.sh
-./scripts/start-buding.sh
+./scripts/run-python.sh -m demo_choreo validate
+./scripts/run-python.sh -m demo_choreo list
+./scripts/run-python.sh -m demo_choreo list --persona xiaoman
+./scripts/run-python.sh -m demo_choreo match '我回来了！' --persona xiaoman
+./scripts/run-python.sh -m demo_choreo run xiaoman_owner_returns --battery 80 --operator-present
+./scripts/run-python.sh -m demo_choreo.operator_console
+./scripts/run-python.sh -m demo_choreo.operator_console --once 4
 ```
 
 默认 `run` 的电量是 0 且操作员不在场，因此会被前置条件阻断。即使所有参数满足，结果仍是 `simulated`。
@@ -47,6 +44,10 @@ live driver 已只实现固定白名单 action，不接受任意 ROS 服务或 D
 
 ## 不用手机的舞台控制
 
-`operator_console` 是 Mac 终端里的八键舞台控制器，不需要手机页面。默认命令做离线模拟；`start-xiaoman.sh` 和 `start-buding.sh` 会同步机载受限桥、建立 SSH 隧道并连接机器人。数字键按场景成对排列：1/2 自我介绍、3/4 主人回来、5/6 安慰主人、7/8 两狗见面；在终端中按一下即可触发，不需要回车。两狗见面启动时显式增加 `--peer-present`，再先按 7 让布丁发起、按 8 让小满回应。
+`operator_console` 是 Mac 终端里的八键舞台控制器，不需要手机页面。默认命令做离线模拟；连接
+设备需要按根目录 README 提供的受信 SSH 配对流程显式完成。数字键按场景成对排列：1/2 自我介绍、
+3/4 主人回来、5/6 安慰主人、7/8 两狗见面；在终端中按一下即可触发，不需要回车。两狗见面启动时
+显式增加 `--peer-present`，再先按 7 让布丁发起、按 8 让小满回应。
 
-live 模式会建立受限 SSH 隧道、等待真实电池与机身上下文，并在每个实际输出前重新检查 2 秒内的状态。按 `x` 可停止当前编排并清除短时表达输出；它不是整机急停。完整现场步骤见 [STAGE-RUNBOOK.md](../STAGE-RUNBOOK.md)。
+live driver 会在每个实际输出前重新检查 2 秒内的状态；按 `x` 可停止当前编排并清除短时表达输出，
+但它不是整机急停。实机连接与现场验收目前仍是人工 Gate，不由这个仓库的离线演示代码自动完成。

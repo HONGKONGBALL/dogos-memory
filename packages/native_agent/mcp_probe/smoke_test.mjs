@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 
 const probeDirectory = fileURLToPath(new URL(".", import.meta.url));
 const requireFromProject = createRequire(
-  new URL("../../package.json", import.meta.url),
+  new URL("../../../package.json", import.meta.url),
 );
 const { Client } = requireFromProject(
   "@modelcontextprotocol/sdk/client/index.js",

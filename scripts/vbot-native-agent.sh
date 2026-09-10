@@ -2,6 +2,7 @@
 set -euo pipefail
 
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
+export PYTHONPATH="$ROOT/packages${PYTHONPATH:+:$PYTHONPATH}"
 COMMAND=${1:-}
 if [[ -n "$COMMAND" ]]; then shift; fi
 

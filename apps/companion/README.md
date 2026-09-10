@@ -1,8 +1,8 @@
 # 大头陪伴循环 · 第一版
 
 > 2026-09-09 更新：实机模式已改为真实话题输入，以下早期“人工 live 输入/仅灯光”说明已被本节替代。
-> `python3 companion/server.py --live --enable-head --port 8767` 使用原生电池、上下文、人物姿态和触摸订阅。
-> 实机需 `python3 -m pip install -r companion/requirements-live.txt`（本 Mac 已有 websockets 16.0）。
+> `./scripts/run-python.sh apps/companion/server.py --live --enable-head --port 8767` 使用原生电池、上下文、人物姿态和触摸订阅。
+> 实机需 `python3 -m pip install -r apps/companion/requirements-live.txt`。
 > `--enable-head` 启用已预检查的小角度头部请求；物理转动尚未确认。默认声音关闭，`--enable-sound` 可选择短音效，实际可听性仍待验证。
 > 手工 observation/respond 在实机模式返回 409；网页显示真实数据来源、年龄、UWB 与地图就绪条件。
 > 摸头原生汪汪是厂商已有能力；当前订阅到的 touch_node 事件尚未证明对应机头触摸。
@@ -13,7 +13,7 @@
 
 ```sh
 cd /path/to/dogos
-python3 companion/server.py
+./scripts/run-python.sh apps/companion/server.py
 ```
 
 打开 http://127.0.0.1:8766 。提交环境场景，启动陪伴；之后无需点击动作，策略持续运行。
@@ -34,7 +34,8 @@ python3 companion/server.py
 
 ## 初版实机适配记录（历史，以上方更新为准）
 
-待有线连接及现有 SSH/AgenticROS 隧道恢复后，可手动以 `python3 companion/server.py --live` 启动。
+待有线连接及现有 SSH/AgenticROS 隧道恢复后，可手动以
+`./scripts/run-python.sh apps/companion/server.py --live` 启动。
 默认 node 来自 PATH，可用 `--node /absolute/path/to/node` 指定。
 实机模式不自动续报人工观察，仍需提交现场状态；当前没有自动读取电量/充电或视觉输入，不能作为无人值守模式。
 蓝色短灯光代表邀请，绿色短灯光代表回应。使用已存在的 `datou_light`，不调用站立、行走、跟随或语音。
@@ -43,7 +44,7 @@ python3 companion/server.py
 ## 验证
 
 ```sh
-python3 -m unittest discover -s companion/tests -v
+uv run python -m unittest discover -s apps/companion/tests -v
 ```
 
 下一阶段：接入带时间戳的真实状态和人物在场事件，核对原生表情资源并现场确认，然后扩展互动表现。

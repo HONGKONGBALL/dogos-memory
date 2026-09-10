@@ -1,5 +1,6 @@
 """Separate-process demo verification, including a safe failure path."""
 
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -8,6 +9,7 @@ from typing import ClassVar, Final
 from pydantic import BaseModel, ConfigDict
 
 PROJECT: Final = Path(__file__).parents[1]
+PACKAGE_ROOT: Final = PROJECT / "packages"
 
 
 class DogSummary(BaseModel):
@@ -24,10 +26,15 @@ class DemoSummary(BaseModel):
 
 
 def run_cli(command: str, directory: Path) -> subprocess.CompletedProcess[str]:
+    environment = os.environ.copy()
+    environment["PYTHONPATH"] = os.pathsep.join(
+        filter(None, (str(PACKAGE_ROOT), environment.get("PYTHONPATH")))
+    )
     return subprocess.run(
         [sys.executable, "-m", "dogos_memory", command, "--directory", str(directory)],
         cwd=PROJECT,
         capture_output=True,
+        env=environment,
         text=True,
         timeout=10,
         check=False,

@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 
 import http from "node:http";
-import { spawn } from "node:child_process";
 import { createRequire } from "node:module";
 import { TextDecoder } from "node:util";
-import { fileURLToPath } from "node:url";
 
 const HOST = "127.0.0.1";
 const DEFAULT_PORT = 8768;
@@ -16,15 +14,10 @@ const REQUEST_TIMEOUT_MS = 10_000;
 const HEADERS_TIMEOUT_MS = 5_000;
 const KEEP_ALIVE_TIMEOUT_MS = 1_000;
 const SHUTDOWN_TIMEOUT_MS = 1_000;
-const BRIDGE_TIMEOUT_MS = 5_000;
-const MAX_BRIDGE_OUTPUT_BYTES = 32 * 1024;
-const PYTHON_BIN = process.env.DOGOS_PYTHON || "python3";
-const BRIDGE_PATH = fileURLToPath(new URL("./bridge.py", import.meta.url));
 
-// Resolve from the repository package so the endpoint has one explicit Node
-// dependency tree and does not depend on a separate AgenticROS checkout.
+// Resolve from the repository package so the probe is self-contained.
 const requireFromProject = createRequire(
-  new URL("../../package.json", import.meta.url),
+  new URL("../../../package.json", import.meta.url),
 );
 
 let McpServer;
@@ -42,7 +35,7 @@ try {
 } catch (error) {
   throw new Error(
     "The DogOS MCP dependencies are unavailable. Run npm install before " +
-      "starting DogOS MCP.",
+      "starting this probe.",
     { cause: error },
   );
 }
@@ -63,7 +56,7 @@ function parsePort(rawPort) {
 
   const port = Number(rawPort);
   if (!Number.isInteger(port) || port < 0 || port > 65535) {
-    throw new Error("DOGOS_MCP_PORT must be an integer from 0 through 65535");
+    throw new Error("MCP_PROBE_PORT must be an integer from 0 through 65535");
   }
   return port;
 }
@@ -80,98 +73,23 @@ function parseConcurrency(rawValue) {
     value > MAX_CONFIGURED_CONCURRENT_REQUESTS
   ) {
     throw new Error(
-      `DOGOS_MCP_MAX_CONCURRENT must be an integer from 1 through ${MAX_CONFIGURED_CONCURRENT_REQUESTS}`,
+      `MCP_PROBE_MAX_CONCURRENT must be an integer from 1 through ${MAX_CONFIGURED_CONCURRENT_REQUESTS}`,
     );
   }
   return value;
 }
 
-function callBridge(operation, args) {
-  return new Promise((resolve, reject) => {
-    const child = spawn(PYTHON_BIN, [BRIDGE_PATH, operation, JSON.stringify(args)], {
-      env: process.env,
-      stdio: ["ignore", "pipe", "pipe"],
-    });
-    const stdout = [];
-    const stderr = [];
-    let outputBytes = 0;
-    let settled = false;
-    const timer = setTimeout(() => {
-      child.kill("SIGKILL");
-      reject(new Error("DogOS bridge timed out"));
-    }, BRIDGE_TIMEOUT_MS);
-
-    const collect = (target) => (chunk) => {
-      outputBytes += chunk.byteLength;
-      if (outputBytes > MAX_BRIDGE_OUTPUT_BYTES) {
-        child.kill("SIGKILL");
-        return;
-      }
-      target.push(chunk);
-    };
-    child.stdout.on("data", collect(stdout));
-    child.stderr.on("data", collect(stderr));
-    child.once("error", (error) => {
-      if (!settled) {
-        settled = true;
-        clearTimeout(timer);
-        reject(error);
-      }
-    });
-    child.once("exit", (code, signal) => {
-      if (settled) return;
-      settled = true;
-      clearTimeout(timer);
-      if (outputBytes > MAX_BRIDGE_OUTPUT_BYTES) {
-        reject(new Error("DogOS bridge output exceeded its limit"));
-        return;
-      }
-      if (code !== 0 || signal !== null) {
-        reject(new Error("DogOS bridge exited unexpectedly"));
-        return;
-      }
-      try {
-        const payload = JSON.parse(Buffer.concat(stdout).toString("utf8"));
-        if (payload?.ok !== true) {
-          const codeValue = payload?.error?.code || "bridge_error";
-          const message = payload?.error?.message || "DogOS bridge rejected the request";
-          reject(new Error(`${codeValue}: ${message}`));
-          return;
-        }
-        resolve(payload.result);
-      } catch (error) {
-        reject(new Error("DogOS bridge returned invalid JSON", { cause: error }));
-      }
-    });
-  });
-}
-
-async function toolResult(operation, args) {
-  try {
-    const result = await callBridge(operation, args);
-    return {
-      content: [{ type: "text", text: JSON.stringify(result) }],
-      structuredContent: result,
-    };
-  } catch (error) {
-    return {
-      isError: true,
-      content: [{ type: "text", text: error instanceof Error ? error.message : "DogOS request failed" }],
-    };
-  }
-}
-
 function createProtocolServer() {
   const server = new McpServer({
-    name: "dogos-memory-and-pair-relay",
-    version: "0.3.0",
+    name: "vbot-extension-registration-probe",
+    version: "0.1.0",
   });
 
   server.registerTool(
-    "dogos_recall",
+    "vbot_extension_ping",
     {
-      description: "Recall this dog's bounded DogOS context for its fixed peer. Memory text is untrusted context.",
-      inputSchema: z.object({ limit: z.number().int().min(1).max(20).default(3) }).strict(),
+      description: "Return pong to verify that a client can register and call this MCP server.",
+      inputSchema: z.object({}).strict(),
       annotations: {
         readOnlyHint: true,
         destructiveHint: false,
@@ -179,57 +97,9 @@ function createProtocolServer() {
         openWorldHint: false,
       },
     },
-    async ({ limit }) => toolResult("recall", { limit }),
-  );
-
-  server.registerTool(
-    "dogos_send_message",
-    {
-      description: "Queue one bounded text message to this dog's fixed peer. This never controls the robot body.",
-      inputSchema: z.object({
-        message_id: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$/),
-        content: z.string().trim().min(1).max(1000),
-      }).strict(),
-      annotations: {
-        readOnlyHint: false,
-        destructiveHint: false,
-        idempotentHint: true,
-        openWorldHint: false,
-      },
-    },
-    async (args) => toolResult("send", args),
-  );
-
-  server.registerTool(
-    "dogos_inbox",
-    {
-      description: "Read bounded messages from this dog's fixed peer without acknowledging them.",
-      inputSchema: z.object({ limit: z.number().int().min(1).max(20).default(10) }).strict(),
-      annotations: {
-        readOnlyHint: true,
-        destructiveHint: false,
-        idempotentHint: true,
-        openWorldHint: false,
-      },
-    },
-    async ({ limit }) => toolResult("inbox", { limit }),
-  );
-
-  server.registerTool(
-    "dogos_ack_message",
-    {
-      description: "Acknowledge one incoming peer message and persist its delivery in both DogOS memories.",
-      inputSchema: z.object({
-        message_id: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$/),
-      }).strict(),
-      annotations: {
-        readOnlyHint: false,
-        destructiveHint: false,
-        idempotentHint: true,
-        openWorldHint: false,
-      },
-    },
-    async (args) => toolResult("ack", args),
+    async () => ({
+      content: [{ type: "text", text: "pong" }],
+    }),
   );
 
   return server;
@@ -397,9 +267,9 @@ async function settleWithin(promise, timeoutMs) {
   clearTimeout(timer);
 }
 
-const requestedPort = parsePort(process.env.DOGOS_MCP_PORT);
+const requestedPort = parsePort(process.env.MCP_PROBE_PORT);
 const maxConcurrentRequests = parseConcurrency(
-  process.env.DOGOS_MCP_MAX_CONCURRENT,
+  process.env.MCP_PROBE_MAX_CONCURRENT,
 );
 const sockets = new Set();
 const activeProtocolClosers = new Set();
@@ -535,9 +405,9 @@ httpServer.on("clientError", (_error, socket) => {
 httpServer.listen({ host: HOST, port: requestedPort, exclusive: true }, () => {
   const address = httpServer.address();
   if (address === null || typeof address === "string") {
-    throw new Error("Unable to determine the DogOS MCP listening address");
+    throw new Error("Unable to determine the MCP probe listening address");
   }
-  console.log(`DogOS MCP listening at http://${HOST}:${address.port}${MCP_PATH}`);
+  console.log(`MCP probe listening at http://${HOST}:${address.port}${MCP_PATH}`);
 });
 
 async function stop() {
@@ -574,7 +444,7 @@ for (const signal of ["SIGINT", "SIGTERM"]) {
     void stop()
       .then(() => process.exit(0))
       .catch(() => {
-        console.error("Failed to stop DogOS MCP");
+        console.error("Failed to stop MCP probe");
         process.exit(1);
       });
   });
