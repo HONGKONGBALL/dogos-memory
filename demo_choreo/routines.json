@@ -1,0 +1,222 @@
+{
+  "schema_version": 2,
+  "personas": {
+    "xiaoman": {
+      "name": "小满",
+      "principle": "先确认不会失去，再开始拥有。",
+      "tempo": "slow",
+      "max_intensity": 0.4,
+      "default_brightness": 18
+    },
+    "buding": {
+      "name": "布丁",
+      "principle": "世界是好的，所有迎面而来的朋友都值得欢迎。",
+      "tempo": "fast",
+      "max_intensity": 1.0,
+      "default_brightness": 50
+    }
+  },
+  "routines": [
+    {
+      "id": "xiaoman_show_identity",
+      "persona": "xiaoman",
+      "label": "小满：谨慎的自我介绍",
+      "triggers": [
+        {"kind": "phrase", "value": "介绍一下你自己"},
+        {"kind": "button", "value": "xiaoman_show_identity"}
+      ],
+      "preconditions": {
+        "min_battery": 20,
+        "require_operator": true,
+        "require_stationary": true,
+        "reject_charging": true,
+        "require_peer": false
+      },
+      "max_duration_ms": 12000,
+      "steps": [
+        {"id": "observe_first", "action": "wait", "args": {"duration_ms": 1800}, "verification": "not_run"},
+        {"id": "look_forward", "action": "head", "args": {"pitch": 0.0, "yaw": 0.03, "duration_ms": 600}, "verification": "service_only"},
+        {"id": "identity_line", "action": "say", "args": {"text": "我是小满。让我先看看你。"}, "verification": "not_run"},
+        {"id": "identity_light", "action": "light", "args": {"rgb": [28, 58, 78], "brightness": 16, "duration_ms": 900}, "verification": "service_only"},
+        {"id": "identity_reset", "action": "head", "args": {"pitch": 0.0, "yaw": 0.0, "duration_ms": 600}, "verification": "service_only"}
+      ]
+    },
+    {
+      "id": "buding_show_identity",
+      "persona": "buding",
+      "label": "布丁：主动的自我介绍",
+      "triggers": [
+        {"kind": "phrase", "value": "介绍一下你自己"},
+        {"kind": "button", "value": "buding_show_identity"}
+      ],
+      "preconditions": {
+        "min_battery": 30,
+        "require_operator": true,
+        "require_stationary": true,
+        "reject_charging": true,
+        "require_peer": false
+      },
+      "max_duration_ms": 15000,
+      "steps": [
+        {"id": "attention_head", "action": "head", "args": {"pitch": -0.03, "yaw": -0.06, "duration_ms": 700}, "verification": "service_only"},
+        {"id": "hello_face", "action": "emotion", "args": {"candidates": ["say_hi", "WINK", "happy"], "duration_ms": 900}, "verification": "service_only"},
+        {"id": "self_intro_pose", "action": "native_dag", "args": {"task_id": "SELF_INTRODUCTION", "source_file": "SELF_INTRODUCTION.json"}, "verification": "not_run"},
+        {"id": "identity_line", "action": "say", "args": {"text": "我是布丁！见到你就是今天最开心的事！"}, "verification": "not_run"},
+        {"id": "identity_light", "action": "light", "args": {"rgb": [255, 150, 40], "brightness": 50, "duration_ms": 1800}, "verification": "service_only"},
+        {"id": "identity_reset", "action": "head", "args": {"pitch": 0.0, "yaw": 0.0, "duration_ms": 700}, "verification": "service_only"}
+      ]
+    },
+    {
+      "id": "xiaoman_owner_returns",
+      "persona": "xiaoman",
+      "label": "小满：先确认，再欢迎主人",
+      "triggers": [
+        {"kind": "phrase", "value": "我回来了"},
+        {"kind": "phrase", "value": "我回来啦"},
+        {"kind": "button", "value": "xiaoman_owner_returns"}
+      ],
+      "preconditions": {
+        "min_battery": 25,
+        "require_operator": true,
+        "require_stationary": true,
+        "reject_charging": true,
+        "require_peer": false
+      },
+      "max_duration_ms": 14000,
+      "steps": [
+        {"id": "sample_sound", "action": "head", "args": {"pitch": 0.0, "yaw": 0.05, "duration_ms": 700}, "verification": "service_only"},
+        {"id": "confirm_footsteps", "action": "wait", "args": {"duration_ms": 1800}, "verification": "not_run"},
+        {"id": "welcome_line", "action": "say", "args": {"text": "……你回来就好。"}, "verification": "not_run"},
+        {"id": "small_happy", "action": "emotion", "args": {"candidates": ["004_happy_10s", "HAPPY_10S", "happy"], "duration_ms": 900}, "verification": "service_only"},
+        {"id": "low_warm_light", "action": "light", "args": {"rgb": [35, 75, 65], "brightness": 18, "duration_ms": 800}, "verification": "service_only"},
+        {"id": "reset_head", "action": "head", "args": {"pitch": 0.0, "yaw": 0.0, "duration_ms": 700}, "verification": "service_only"}
+      ]
+    },
+    {
+      "id": "buding_owner_returns",
+      "persona": "buding",
+      "label": "布丁：全力欢迎主人",
+      "triggers": [
+        {"kind": "phrase", "value": "我回来了"},
+        {"kind": "phrase", "value": "我回来啦"},
+        {"kind": "button", "value": "buding_owner_returns"}
+      ],
+      "preconditions": {
+        "min_battery": 40,
+        "require_operator": true,
+        "require_stationary": true,
+        "reject_charging": true,
+        "require_peer": false
+      },
+      "max_duration_ms": 25000,
+      "steps": [
+        {"id": "attention_head", "action": "head", "args": {"pitch": -0.04, "yaw": 0.08, "duration_ms": 800}, "verification": "service_only"},
+        {"id": "excited_face", "action": "emotion", "args": {"candidates": ["HAPPY_10S", "happy", "say_hi"], "duration_ms": 1000}, "verification": "service_only"},
+        {"id": "excited", "action": "native_dag", "args": {"task_id": "head_basic_up", "source_file": "EXCITED.json"}, "verification": "not_run"},
+        {"id": "happy_jump", "action": "native_dag", "args": {"task_id": "HAPPY_BOUNCE", "source_file": "HAPPY_JUMP.json"}, "verification": "not_run"},
+        {"id": "welcome_line", "action": "say", "args": {"text": "你回来啦！我等你好久了！"}, "verification": "not_run"},
+        {"id": "high_five", "action": "native_dag", "args": {"task_id": "HIGH_FIVE_L", "source_file": "HIGH_FIVE_L.json"}, "verification": "not_run"},
+        {"id": "bright_warm_light", "action": "light", "args": {"rgb": [255, 145, 30], "brightness": 50, "duration_ms": 1800}, "verification": "service_only"},
+        {"id": "welcome_reset", "action": "head", "args": {"pitch": 0.0, "yaw": 0.0, "duration_ms": 800}, "verification": "service_only"}
+      ]
+    },
+    {
+      "id": "xiaoman_comfort_tired",
+      "persona": "xiaoman",
+      "label": "小满：安静陪伴",
+      "triggers": [
+        {"kind": "phrase", "value": "我今天有点累"},
+        {"kind": "button", "value": "xiaoman_comfort_tired"}
+      ],
+      "preconditions": {
+        "min_battery": 20,
+        "require_operator": true,
+        "require_stationary": true,
+        "reject_charging": true,
+        "require_peer": false
+      },
+      "max_duration_ms": 14000,
+      "steps": [
+        {"id": "quiet_pause", "action": "wait", "args": {"duration_ms": 1000}, "verification": "not_run"},
+        {"id": "listen_tilt", "action": "head", "args": {"pitch": 0.0, "yaw": -0.04, "duration_ms": 800}, "verification": "service_only"},
+        {"id": "comfort_line", "action": "say", "args": {"text": "……那我陪你坐一会儿。"}, "verification": "not_run"},
+        {"id": "calm_light", "action": "light", "args": {"rgb": [24, 48, 78], "brightness": 14, "duration_ms": 1000}, "verification": "service_only"},
+        {"id": "comfort_reset", "action": "head", "args": {"pitch": 0.0, "yaw": 0.0, "duration_ms": 800}, "verification": "service_only"}
+      ]
+    },
+    {
+      "id": "buding_comfort_tired",
+      "persona": "buding",
+      "label": "布丁：主动打气",
+      "triggers": [
+        {"kind": "phrase", "value": "我今天有点累"},
+        {"kind": "button", "value": "buding_comfort_tired"}
+      ],
+      "preconditions": {
+        "min_battery": 35,
+        "require_operator": true,
+        "require_stationary": true,
+        "reject_charging": true,
+        "require_peer": false
+      },
+      "max_duration_ms": 20000,
+      "steps": [
+        {"id": "safe_listen_tilt", "action": "head", "args": {"pitch": 0.0, "yaw": -0.07, "duration_ms": 800}, "verification": "service_only"},
+        {"id": "encouraging_face", "action": "emotion", "args": {"candidates": ["LISTEN", "happy", "WINK"], "duration_ms": 900}, "verification": "service_only"},
+        {"id": "listen_tilt", "action": "native_dag", "args": {"task_id": "TILT_HEAD_LISTEN", "source_file": "TILT_HEAD_LISTEN.json"}, "verification": "not_run"},
+        {"id": "comfort_line", "action": "say", "args": {"text": "没关系！我陪你，我们一起加油！"}, "verification": "not_run"},
+        {"id": "cheer", "action": "native_dag", "args": {"task_id": "cheer_l", "source_file": "CHEER_L.json"}, "verification": "not_run"},
+        {"id": "happy_light", "action": "light", "args": {"rgb": [255, 180, 35], "brightness": 48, "duration_ms": 1600}, "verification": "service_only"},
+        {"id": "comfort_reset", "action": "head", "args": {"pitch": 0.0, "yaw": 0.0, "duration_ms": 800}, "verification": "service_only"}
+      ]
+    },
+    {
+      "id": "xiaoman_meets_buding",
+      "persona": "xiaoman",
+      "label": "小满：观察后接受布丁",
+      "triggers": [
+        {"kind": "button", "value": "xiaoman_meets_buding"}
+      ],
+      "preconditions": {
+        "min_battery": 35,
+        "require_operator": true,
+        "require_stationary": true,
+        "reject_charging": true,
+        "require_peer": true
+      },
+      "max_duration_ms": 16000,
+      "steps": [
+        {"id": "observe_buding", "action": "head", "args": {"pitch": 0.0, "yaw": 0.05, "duration_ms": 700}, "verification": "service_only"},
+        {"id": "wait_three_seconds", "action": "wait", "args": {"duration_ms": 3000}, "verification": "not_run"},
+        {"id": "accept_line", "action": "say", "args": {"text": "……嗯，今天也一起。"}, "verification": "not_run"},
+        {"id": "small_happy", "action": "emotion", "args": {"candidates": ["004_happy_10s", "happy"], "duration_ms": 800}, "verification": "service_only"},
+        {"id": "reset_head", "action": "head", "args": {"pitch": 0.0, "yaw": 0.0, "duration_ms": 700}, "verification": "service_only"}
+      ]
+    },
+    {
+      "id": "buding_meets_xiaoman",
+      "persona": "buding",
+      "label": "布丁：主动把小满变成朋友",
+      "triggers": [
+        {"kind": "button", "value": "buding_meets_xiaoman"}
+      ],
+      "preconditions": {
+        "min_battery": 45,
+        "require_operator": true,
+        "require_stationary": true,
+        "reject_charging": true,
+        "require_peer": true
+      },
+      "max_duration_ms": 26000,
+      "steps": [
+        {"id": "look_to_xiaoman", "action": "head", "args": {"pitch": 0.0, "yaw": 0.08, "duration_ms": 800}, "verification": "service_only"},
+        {"id": "friend_face", "action": "emotion", "args": {"candidates": ["say_hi", "happy", "WINK"], "duration_ms": 900}, "verification": "service_only"},
+        {"id": "wave_first", "action": "native_dag", "args": {"task_id": "WAVE", "source_file": "WAVE.json"}, "verification": "not_run"},
+        {"id": "two_barks", "action": "native_dag", "args": {"task_id": "DOG_BARK", "source_file": "DOG_BARK.json"}, "verification": "not_run"},
+        {"id": "friend_line", "action": "say", "args": {"text": "小满！今天也一起玩吧！"}, "verification": "not_run"},
+        {"id": "friend_light", "action": "light", "args": {"rgb": [255, 170, 30], "brightness": 50, "duration_ms": 2000}, "verification": "service_only"},
+        {"id": "friend_reset", "action": "head", "args": {"pitch": 0.0, "yaw": 0.0, "duration_ms": 800}, "verification": "service_only"}
+      ]
+    }
+  ]
+}

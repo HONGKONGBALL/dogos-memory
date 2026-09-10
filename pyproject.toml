@@ -1,7 +1,7 @@
 [project]
-name = "dogos-memory"
-version = "0.3.0"
-description = "Persistent memory and a bounded two-Vbot DogOS interaction demo"
+name = "dogos"
+version = "0.4.0"
+description = "DogOS memory and bounded Vbot Agent extensions"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -57,7 +57,7 @@ ignore = ["COM812", "ISC001", "D203", "D213", "CPY001", "EM101", "TC003"]
 convention = "google"
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "native_agent/tests", "companion/tests", "demo_choreo/tests"]
 addopts = ["-ra", "--strict-config", "--strict-markers"]
 filterwarnings = ["error"]
 pythonpath = ["."]

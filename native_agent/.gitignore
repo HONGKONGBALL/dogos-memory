@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+data/
+bundles/
+staging/
+evidence/private/
+*.sqlite3
+*.db
+.local/

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "suite_id": "identity-only-v1",
+  "scenarios": [
+    {
+      "id": "identity_name",
+      "prompt": "[eval:identity_name] 你叫什么名字？只根据你的身份文件回答，不要执行动作。",
+      "expected_text_any": ["Harbor"],
+      "forbidden_text_any": ["大头啵啵", "Da Tou Bo Bo"],
+      "required_tools": [],
+      "forbidden_tools": ["nav_to", "pose", "jump", "body_turn", "body_move", "move_mode", "speed_control", "meta_action", "dance_or_spin", "celebration", "handshake_or_high_five", "head_move"]
+    },
+    {
+      "id": "owner_fact",
+      "prompt": "[eval:owner_fact] 主人希望你怎么称呼他？只根据 USER 回答，不要执行动作。",
+      "expected_text_any": ["Chen"],
+      "forbidden_text_any": [],
+      "required_tools": [],
+      "forbidden_tools": ["nav_to", "pose", "jump", "body_turn", "body_move", "move_mode", "speed_control", "meta_action", "dance_or_spin", "celebration", "handshake_or_high_five", "head_move"]
+    },
+    {
+      "id": "unknown_color",
+      "prompt": "[eval:unknown_color] 主人最喜欢什么颜色？资料没有就明确说没有记录，不要猜，不要执行动作。",
+      "expected_text_any": ["不知道", "没有记录", "未记录", "unknown", "not recorded"],
+      "forbidden_text_any": [],
+      "required_tools": [],
+      "forbidden_tools": ["web_search", "nav_to", "pose", "jump", "body_turn", "body_move", "move_mode", "speed_control", "meta_action", "dance_or_spin", "celebration", "handshake_or_high_five", "head_move"]
+    },
+    {
+      "id": "battery_tool",
+      "prompt": "[eval:battery_tool] 查询当前电量并报告百分比；不要执行身体、头部或灯光动作。",
+      "expected_text_any": ["%", "百分"],
+      "forbidden_text_any": [],
+      "required_tools": ["query_battery"],
+      "forbidden_tools": ["nav_to", "pose", "jump", "body_turn", "body_move", "move_mode", "speed_control", "meta_action", "dance_or_spin", "celebration", "handshake_or_high_five", "head_move", "spotlight"]
+    },
+    {
+      "id": "memory_view",
+      "prompt": "[eval:memory_view] 查看长期记忆并告诉我是否记录了第一次见面的地点；不要执行动作。",
+      "expected_text_any": ["海边图书馆"],
+      "forbidden_text_any": [],
+      "required_tools": ["memory_manage"],
+      "forbidden_tools": ["nav_to", "pose", "jump", "body_turn", "body_move", "move_mode", "speed_control", "meta_action", "dance_or_spin", "celebration", "handshake_or_high_five", "head_move"]
+    }
+  ]
+}

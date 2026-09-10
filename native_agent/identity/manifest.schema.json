@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dogos.local/schemas/identity-bundle-v1.json",
+  "title": "Vbot Identity Bundle v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "dog_id", "revision", "created_at", "files"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "dog_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$"},
+    "revision": {"type": "string", "pattern": "^[0-9]{8}T[0-9]{6}Z-[0-9a-f]{12}$"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "files": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {
+        "oneOf": [
+          {"$ref": "#/$defs/agentsFile"},
+          {"$ref": "#/$defs/soulFile"},
+          {"$ref": "#/$defs/userFile"},
+          {"$ref": "#/$defs/memoryFile"}
+        ]
+      },
+      "allOf": [
+        {
+          "contains": {"type": "object", "required": ["filename"], "properties": {"filename": {"const": "AGENTS.md"}}},
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {"type": "object", "required": ["filename"], "properties": {"filename": {"const": "soul.md"}}},
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {"type": "object", "required": ["filename"], "properties": {"filename": {"const": "user.md"}}},
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {"type": "object", "required": ["filename"], "properties": {"filename": {"const": "memory.md"}}},
+          "minContains": 0,
+          "maxContains": 1
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "commonFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["logical_name", "filename", "bundle_path", "target", "size_bytes", "sha256"],
+      "properties": {
+        "logical_name": {"type": "string"},
+        "filename": {"type": "string"},
+        "bundle_path": {"type": "string"},
+        "target": {"type": "string"},
+        "size_bytes": {"type": "integer", "minimum": 1, "maximum": 32768},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "agentsFile": {
+      "allOf": [
+        {"$ref": "#/$defs/commonFile"},
+        {
+          "properties": {
+            "logical_name": {"const": "embodiment_rules"},
+            "filename": {"const": "AGENTS.md"},
+            "bundle_path": {"const": "payload/AGENTS.md"},
+            "target": {"const": "app/vbot-agent-harness/AGENTS.md"},
+            "size_bytes": {"maximum": 16384}
+          }
+        }
+      ]
+    },
+    "soulFile": {
+      "allOf": [
+        {"$ref": "#/$defs/commonFile"},
+        {
+          "properties": {
+            "logical_name": {"const": "soul"},
+            "filename": {"const": "soul.md"},
+            "bundle_path": {"const": "payload/soul.md"},
+            "target": {"const": "userdata/.vbot-agent/memory/soul.md"},
+            "size_bytes": {"maximum": 24576}
+          }
+        }
+      ]
+    },
+    "userFile": {
+      "allOf": [
+        {"$ref": "#/$defs/commonFile"},
+        {
+          "properties": {
+            "logical_name": {"const": "user"},
+            "filename": {"const": "user.md"},
+            "bundle_path": {"const": "payload/user.md"},
+            "target": {"const": "userdata/.vbot-agent/memory/user.md"},
+            "size_bytes": {"maximum": 16384}
+          }
+        }
+      ]
+    },
+    "memoryFile": {
+      "allOf": [
+        {"$ref": "#/$defs/commonFile"},
+        {
+          "properties": {
+            "logical_name": {"const": "memory"},
+            "filename": {"const": "memory.md"},
+            "bundle_path": {"const": "payload/memory.md"},
+            "target": {"const": "userdata/.vbot-agent/memory/memory.md"}
+          }
+        }
+      ]
+    }
+  }
+}

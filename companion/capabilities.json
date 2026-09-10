@@ -1,0 +1,4821 @@
+{
+  "source": "historical robot schema snapshot; validation tracked separately",
+  "services": [
+    {
+      "name": "/actmode/mark_time",
+      "type": "function_msgs/srv/BaseTrigger",
+      "enabled": false,
+      "request": {
+        "enable": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "uint8"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/agent/enable",
+      "type": "std_srvs/srv/SetBool",
+      "enabled": false,
+      "request": {
+        "data": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/agent/get_jpeg_image",
+      "type": "std_srvs/srv/Trigger",
+      "enabled": false,
+      "request": {},
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/alignment_service/enable",
+      "type": "std_srvs/srv/SetBool",
+      "enabled": false,
+      "request": {
+        "data": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/audio_loopback_test",
+      "type": "speech_msgs/srv/AudioLoopbackTest",
+      "enabled": false,
+      "request": {},
+      "response": {
+        "overall_pass": "boolean",
+        "ref_pass": "boolean",
+        "mic_pass": "boolean",
+        "result_json": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/base_action",
+      "type": "function_msgs/srv/BaseAction",
+      "enabled": false,
+      "request": {
+        "target_state": "uint8",
+        "mode": "uint8",
+        "req_id": "string",
+        "pre_check": "boolean",
+        "angle_rad": "float",
+        "distance_m": "float",
+        "steps": "int32",
+        "x": "float",
+        "y": "float",
+        "z": "float",
+        "has_z": "boolean",
+        "stop_distance": "float"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "int32"
+      },
+      "constants": {
+        "MOVE_BACKWARD": 2,
+        "MOVE_FORWARD": 1,
+        "MOVE_HEAD": 6,
+        "MOVE_LEFT": 3,
+        "MOVE_RIGHT": 4,
+        "NAV_TO_POINT": 5,
+        "ROTATE_IN_PLACE": 0
+      },
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/calib_config",
+      "type": "slam_msgs/srv/CalibParamUpload",
+      "enabled": false,
+      "request": {
+        "type": "string",
+        "content": "string"
+      },
+      "response": {
+        "success": "boolean"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/calib_download",
+      "type": "slam_msgs/srv/CalibParamDownload",
+      "enabled": false,
+      "request": {},
+      "response": {
+        "success": "boolean",
+        "content": "string",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/clear_faults",
+      "type": "software_msgs/srv/ClearFaults",
+      "enabled": false,
+      "request": {
+        "type": "octet",
+        "fault_array": "sequence<uint32>"
+      },
+      "response": {
+        "error_code": "int32",
+        "desc": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/cloud_agent/download_package/_action/cancel_goal",
+      "type": "action_msgs/srv/CancelGoal",
+      "enabled": false,
+      "request": {
+        "goal_info": "action_msgs/GoalInfo"
+      },
+      "response": {
+        "return_code": "int8",
+        "goals_canceling": "sequence<action_msgs/GoalInfo>"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/cloud_agent/download_package/_action/get_result",
+      "type": "software_msgs/action/DownloadPackage_GetResult",
+      "enabled": false,
+      "schema_error": "module 'software_msgs.action' has no attribute 'DownloadPackage_GetResult'",
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/cloud_agent/download_package/_action/send_goal",
+      "type": "software_msgs/action/DownloadPackage_SendGoal",
+      "enabled": false,
+      "schema_error": "module 'software_msgs.action' has no attribute 'DownloadPackage_SendGoal'",
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/cloud_agent/update_eeprom",
+      "type": "software_msgs/srv/UpdateEeprom",
+      "enabled": false,
+      "request": {
+        "file_name": "string",
+        "offset": "uint64",
+        "content": "sequence<uint8>"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/control_manager/enable_joy",
+      "type": "std_srvs/srv/SetBool",
+      "enabled": false,
+      "request": {
+        "data": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/display_node/backlight_ctrl",
+      "type": "peripheral_msgs/srv/BacklightCtrl",
+      "enabled": false,
+      "request": {
+        "value": "uint8"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/display_node/display_imgs",
+      "type": "peripheral_msgs/srv/DisplayImgs",
+      "enabled": false,
+      "request": {
+        "images": "sequence<peripheral_msgs/ShowImg>",
+        "duration_ms": "sequence<uint32>"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/display_node/enable_show_info",
+      "type": "std_srvs/srv/SetBool",
+      "enabled": false,
+      "request": {
+        "data": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/display_node/get_supported_emotions",
+      "type": "peripheral_msgs/srv/GetSupportedEmotions",
+      "enabled": true,
+      "request": {},
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "supported_emotions": "sequence<string>"
+      },
+      "constants": {},
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/display_node/play_emotion",
+      "type": "peripheral_msgs/srv/PlayEmotion",
+      "enabled": false,
+      "request": {
+        "target_state": "uint8",
+        "req_id": "string",
+        "pre_check": "boolean",
+        "mode": "uint8",
+        "duration_ms": "int32"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "int32"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "service_confirmed_004_happy_10s_2000ms_visual_pending",
+      "autonomy_enabled": true,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/display_node/screen_state",
+      "type": "peripheral_msgs/srv/QueryState",
+      "enabled": true,
+      "request": {},
+      "response": {
+        "enable": "boolean",
+        "value": "uint8",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/dvr/delete_session",
+      "type": "dvr_msgs/srv/DeleteSession",
+      "enabled": false,
+      "request": {
+        "session_id": "string",
+        "force_delete": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "uint32",
+        "deleted_bytes": "uint64"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/dvr/get_playback_url",
+      "type": "dvr_msgs/srv/GetPlaybackUrl",
+      "enabled": false,
+      "request": {
+        "session_id": "string",
+        "quality": "string",
+        "generate_thumbnail": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "uint32",
+        "m3u8_url": "string",
+        "base_url": "string",
+        "thumbnail_url": "string",
+        "duration_seconds": "uint32",
+        "video_width": "uint32",
+        "video_height": "uint32",
+        "video_fps": "float",
+        "total_segments": "uint32"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/dvr/get_session_list",
+      "type": "dvr_msgs/srv/GetSessionList",
+      "enabled": true,
+      "request": {
+        "start_time": "builtin_interfaces/Time",
+        "end_time": "builtin_interfaces/Time",
+        "max_results": "uint32"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "uint32",
+        "session_ids": "sequence<string>",
+        "session_names": "sequence<string>",
+        "start_times": "sequence<builtin_interfaces/Time>",
+        "durations": "sequence<uint32>",
+        "file_sizes": "sequence<uint64>",
+        "has_video": "sequence<boolean>",
+        "has_audio": "sequence<boolean>"
+      },
+      "constants": {},
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/dvr/remove_records",
+      "type": "dvr_msgs/srv/RemoveRecords",
+      "enabled": false,
+      "request": {
+        "record_ids": "sequence<string>"
+      },
+      "response": {
+        "success": "boolean",
+        "partial_success": "boolean",
+        "message": "string",
+        "error_code": "uint32",
+        "removed_record_ids": "sequence<string>",
+        "removed_record_bytes": "sequence<uint64>",
+        "total_removed_bytes": "uint64",
+        "failed_record_ids": "sequence<string>",
+        "failed_error_codes": "sequence<uint32>",
+        "failed_messages": "sequence<string>"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/dvr/set_enabled",
+      "type": "dvr_msgs/srv/SetDvrEnabled",
+      "enabled": false,
+      "request": {
+        "enabled": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "current": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/ego_state_estimator/get_instant_status",
+      "type": "function_msgs/srv/GetInstantEstimatorStatus",
+      "enabled": true,
+      "request": {
+        "require_ramp": "boolean",
+        "require_payload": "boolean",
+        "min_sample_time": "builtin_interfaces/Time"
+      },
+      "response": {
+        "sample_time": "builtin_interfaces/Time",
+        "query_code": "uint8",
+        "query_reason": "string",
+        "ramp_code": "uint8",
+        "ramp_status": "uint8",
+        "ramp_angle_deg": "float",
+        "payload_code": "uint8",
+        "payload_status": "uint8",
+        "payload_mass_kg": "float"
+      },
+      "constants": {},
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/engineer_x5",
+      "type": "std_srvs/srv/SetBool",
+      "enabled": false,
+      "request": {
+        "data": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/execute_s100_command",
+      "type": "software_msgs/srv/ExecuteCommand",
+      "enabled": false,
+      "request": {
+        "command": "string"
+      },
+      "response": {
+        "success": "boolean",
+        "ret_code": "int32",
+        "output": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/execute_x5_command",
+      "type": "software_msgs/srv/ExecuteCommand",
+      "enabled": false,
+      "request": {
+        "command": "string"
+      },
+      "response": {
+        "success": "boolean",
+        "ret_code": "int32",
+        "output": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/fan_node/control",
+      "type": "peripheral_msgs/srv/FanControl",
+      "enabled": false,
+      "request": {
+        "fan_idx": "uint8",
+        "speed_percent": "float"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/fan_node/speed",
+      "type": "peripheral_msgs/srv/FanSpeed",
+      "enabled": false,
+      "request": {
+        "fan_idx": "uint8"
+      },
+      "response": {
+        "success": "boolean",
+        "speed_rpm": "uint32",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/firmware_version/motor",
+      "type": "firmware_version_msgs/srv/GetFirmwareVersion",
+      "enabled": true,
+      "request": {
+        "target_device_type": "uint8",
+        "ids": "sequence<uint16>"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "versions": "sequence<firmware_version_msgs/FirmwareVersion>"
+      },
+      "constants": {},
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/firmware_version/servo",
+      "type": "firmware_version_msgs/srv/GetFirmwareVersion",
+      "enabled": true,
+      "request": {
+        "target_device_type": "uint8",
+        "ids": "sequence<uint16>"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "versions": "sequence<firmware_version_msgs/FirmwareVersion>"
+      },
+      "constants": {},
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/firmware_version/uwb",
+      "type": "firmware_version_msgs/srv/GetFirmwareVersion",
+      "enabled": true,
+      "request": {
+        "target_device_type": "uint8",
+        "ids": "sequence<uint16>"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "versions": "sequence<firmware_version_msgs/FirmwareVersion>"
+      },
+      "constants": {},
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/function/context/get_context",
+      "type": "function_msgs/srv/GetContext",
+      "enabled": true,
+      "request": {},
+      "response": {
+        "snapshot": "function_msgs/ContextSnapShot"
+      },
+      "constants": {},
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/function/context/set_context",
+      "type": "function_msgs/srv/SetContext",
+      "enabled": false,
+      "request": {
+        "kv_pairs": "sequence<function_msgs/KeyValue>",
+        "keys": "sequence<string>",
+        "values": "sequence<string>",
+        "source_node": "string",
+        "request_id": "string"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/function/following",
+      "type": "function_msgs/srv/ControlFollowing",
+      "enabled": true,
+      "request": {
+        "target_state": "uint32",
+        "mode": "uint32",
+        "req_id": "string",
+        "pre_check": "boolean",
+        "x": "float",
+        "y": "float",
+        "yaw": "float",
+        "goal_frame": "string",
+        "stop_distance": "float",
+        "max_xvel": "float",
+        "prompt": "string"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "int32"
+      },
+      "constants": {
+        "ASYNC_SEMANTIC_NAV": 7,
+        "COME_TO_ME": 4,
+        "FOLLOWING": 1,
+        "NAV_TO_POINT": 3,
+        "ROAMING": 2,
+        "STOP": 0,
+        "SYNC_SEMANTIC_NAV": 6,
+        "WALK": 5
+      },
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/function/following/set_speed",
+      "type": "function_msgs/srv/SetFollowSpeed",
+      "enabled": false,
+      "request": {
+        "following_speed": "float",
+        "source": "string"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "applied_speed": "float",
+        "error_code": "int32"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/function/semantic_nav_query",
+      "type": "function_msgs/srv/SemanticNavQuery",
+      "enabled": false,
+      "request": {
+        "prompt": "string",
+        "base64_image": "string",
+        "timestamp": "builtin_interfaces/Time",
+        "use_predicted_depth": "boolean",
+        "camera_frame_id": "string",
+        "roi_x_min": "uint32",
+        "roi_y_min": "uint32",
+        "roi_x_max": "uint32",
+        "roi_y_max": "uint32"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "direction": "geometry_msgs/Vector3",
+        "confidence": "float",
+        "estimated_distance_m": "float",
+        "hor_fov": "float",
+        "ver_fov": "float",
+        "point_count": "uint32",
+        "matched_time_diff_ms": "float",
+        "frame_id": "string",
+        "cloud": "sensor_msgs/PointCloud2"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/function_input",
+      "type": "function_msgs/srv/FunctionInput",
+      "enabled": false,
+      "request": {
+        "source": "string",
+        "dag": "string",
+        "request_id": "string"
+      },
+      "response": {
+        "success": "sequence<boolean>",
+        "response": "string",
+        "request_id": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/generate_gdc_bin",
+      "type": "camera_msgs/srv/GenerateGdcBin",
+      "enabled": false,
+      "request": {
+        "gdc_width": "int32",
+        "gdc_height": "int32",
+        "out_width": "int32",
+        "out_height": "int32",
+        "left": "sensor_msgs/CameraInfo",
+        "right": "sensor_msgs/CameraInfo",
+        "output_prefix": "string"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "left_bin_path": "string",
+        "right_bin_path": "string",
+        "left_bin_size": "uint64",
+        "right_bin_size": "uint64"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/get_faults_count",
+      "type": "software_msgs/srv/GetFaultsCount",
+      "enabled": true,
+      "request": {},
+      "response": {
+        "fault_cnt": "sequence<software_msgs/FaultList>",
+        "error_code": "int32",
+        "desc": "string"
+      },
+      "constants": {},
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/get_faults_info",
+      "type": "software_msgs/srv/GetFaultsInfo",
+      "enabled": true,
+      "request": {
+        "type": "octet",
+        "fault_list": "sequence<software_msgs/FaultList>"
+      },
+      "response": {
+        "fault_info_array": "sequence<software_msgs/FaultInfo>",
+        "error_code": "int32",
+        "desc": "string"
+      },
+      "constants": {},
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/get_jpeg_images",
+      "type": "camera_msgs/srv/GetJpegImages",
+      "enabled": false,
+      "request": {
+        "request": "sequence<camera_msgs/JpegRequest>"
+      },
+      "response": {
+        "response": "sequence<camera_msgs/JpegResponse>"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/get_lowstate",
+      "type": "lowlevel_msg/srv/GetLowState",
+      "enabled": true,
+      "request": {},
+      "response": {
+        "low_state": "lowlevel_msg/LowState",
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/get_path_to_target",
+      "type": "slam_msgs/srv/GetPathToTarget",
+      "enabled": true,
+      "request": {
+        "target_name": "string"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "header": "std_msgs/Header",
+        "path_points": "sequence<geometry_msgs/Point>"
+      },
+      "constants": {},
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/guard_safety_check",
+      "type": "function_msgs/srv/GetGuard",
+      "enabled": false,
+      "request": {
+        "mode": "string"
+      },
+      "response": {
+        "front_occupancy": "float",
+        "left_occupancy": "float",
+        "right_occupancy": "float",
+        "rear_occupancy": "float",
+        "front_has_obstacle": "boolean",
+        "left_has_obstacle": "boolean",
+        "right_has_obstacle": "boolean",
+        "rear_has_obstacle": "boolean",
+        "error_code": "int32",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/guard_trigger",
+      "type": "function_msgs/srv/BaseTrigger",
+      "enabled": false,
+      "request": {
+        "enable": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "uint8"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/head_action",
+      "type": "lowlevel_msg/srv/HeadAction",
+      "enabled": false,
+      "request": {
+        "target_state": "uint8",
+        "mode": "uint8",
+        "req_id": "string",
+        "pre_check": "boolean",
+        "action_path": "string",
+        "duration_ms": "int32",
+        "loop_enabled": "boolean",
+        "playback_rate": "float",
+        "target_angles": "sequence<float>"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "int32"
+      },
+      "constants": {
+        "ANGLE_CONTROL": 0,
+        "STREAM": 1
+      },
+      "integration": "deployed_bounded_angles_with_timed_return",
+      "physical_validation": "service_ok_actual_angles_unconfirmed",
+      "autonomy_enabled": false,
+      "next_gate": "Precheck; ±0.12 rad; robot-side timed neutral return; verify physically"
+    },
+    {
+      "name": "/image/show_vln_path",
+      "type": "std_srvs/srv/SetBool",
+      "enabled": false,
+      "request": {
+        "data": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/imei/query",
+      "type": "std_srvs/srv/Trigger",
+      "enabled": false,
+      "request": {},
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/immeaudio_control",
+      "type": "speech_msgs/srv/ImmeaudioControl",
+      "enabled": false,
+      "request": {
+        "enable": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/infrared_camera/enable",
+      "type": "std_srvs/srv/SetBool",
+      "enabled": false,
+      "request": {
+        "data": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/isp_adjust_enable",
+      "type": "std_srvs/srv/SetBool",
+      "enabled": false,
+      "request": {
+        "data": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/isp_adjust_state",
+      "type": "peripheral_msgs/srv/QueryState",
+      "enabled": false,
+      "request": {},
+      "response": {
+        "enable": "boolean",
+        "value": "uint8",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/legacy/base_action",
+      "type": "function_msgs/srv/BaseAction",
+      "enabled": false,
+      "request": {
+        "target_state": "uint8",
+        "mode": "uint8",
+        "req_id": "string",
+        "pre_check": "boolean",
+        "angle_rad": "float",
+        "distance_m": "float",
+        "steps": "int32",
+        "x": "float",
+        "y": "float",
+        "z": "float",
+        "has_z": "boolean",
+        "stop_distance": "float"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "int32"
+      },
+      "constants": {
+        "MOVE_BACKWARD": 2,
+        "MOVE_FORWARD": 1,
+        "MOVE_HEAD": 6,
+        "MOVE_LEFT": 3,
+        "MOVE_RIGHT": 4,
+        "NAV_TO_POINT": 5,
+        "ROTATE_IN_PLACE": 0
+      },
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/legacy/function_input",
+      "type": "function_msgs/srv/FunctionInput",
+      "enabled": false,
+      "request": {
+        "source": "string",
+        "dag": "string",
+        "request_id": "string"
+      },
+      "response": {
+        "success": "sequence<boolean>",
+        "response": "string",
+        "request_id": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/light_node/control",
+      "type": "peripheral_msgs/srv/LightControl",
+      "enabled": true,
+      "request": {
+        "target_state": "uint8",
+        "req_id": "string",
+        "pre_check": "boolean",
+        "mode": "uint8",
+        "red": "uint8",
+        "green": "uint8",
+        "blue": "uint8",
+        "brightness": "uint8",
+        "speed": "float",
+        "duration_ms": "uint16"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "int32"
+      },
+      "constants": {
+        "BREATHING": 2,
+        "CHARGING_PROGRESS": 249,
+        "CIRCLEANDFLASH": 4,
+        "FIXEDCOLOR": 0,
+        "FLASHING": 3,
+        "GRADIENT": 1,
+        "OTA_PROGRESS": 248,
+        "PULSE": 5
+      },
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": true,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/light_node/fill_light",
+      "type": "peripheral_msgs/srv/FillLight",
+      "enabled": false,
+      "request": {
+        "enable": "boolean",
+        "brightness": "uint8"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/light_node/gradient",
+      "type": "peripheral_msgs/srv/LightGradient",
+      "enabled": false,
+      "request": {
+        "colors": "sequence<uint8>",
+        "brightness": "uint8",
+        "transition_time": "float",
+        "loop": "boolean",
+        "duration_ms": "uint16"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/light_node/status",
+      "type": "peripheral_msgs/srv/GetLightStatus",
+      "enabled": true,
+      "request": {},
+      "response": {
+        "is_enabled": "boolean",
+        "current_mode": "uint8",
+        "current_red": "uint8",
+        "current_green": "uint8",
+        "current_blue": "uint8",
+        "current_brightness": "uint8",
+        "current_speed": "float",
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/load_stereo_calibration",
+      "type": "camera_msgs/srv/LoadStereoCalibration",
+      "enabled": false,
+      "request": {},
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "left": "sensor_msgs/CameraInfo",
+        "right": "sensor_msgs/CameraInfo"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/locomotion/control_enable",
+      "type": "std_srvs/srv/SetBool",
+      "enabled": false,
+      "request": {
+        "data": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/locomotion/debug/frame_recording",
+      "type": "lowlevel_msg/srv/FrameRecording",
+      "enabled": false,
+      "request": {
+        "start": "boolean",
+        "channel": "int16",
+        "can_id": "int32",
+        "direction": "int8"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/locomotion/himloco_control",
+      "type": "function_msgs/srv/HimlocoControl",
+      "enabled": false,
+      "request": {
+        "operation": "string"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/locomotion/set_run_mode",
+      "type": "function_msgs/srv/SetRunMode",
+      "enabled": false,
+      "request": {
+        "target_state": "uint8",
+        "mode": "uint8",
+        "req_id": "string",
+        "pre_check": "boolean",
+        "has_is_traction_user_param": "boolean",
+        "is_traction_user_param": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "int32"
+      },
+      "constants": {
+        "MODE_IDLE": 1,
+        "MODE_INDOOR": 5,
+        "MODE_LOCO": 2,
+        "MODE_MANUAL": 0,
+        "MODE_MPC": 3,
+        "MODE_PILOT": 4
+      },
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/locomotion/set_traction_user_param",
+      "type": "function_msgs/srv/SetTractionUserParam",
+      "enabled": false,
+      "request": {
+        "traction_inertia_user": "double"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/loop",
+      "type": "function_msgs/srv/BaseTrigger",
+      "enabled": false,
+      "request": {
+        "enable": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "uint8"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/music_record_control",
+      "type": "speech_msgs/srv/MusicRecordControl",
+      "enabled": false,
+      "request": {
+        "request_type": "uint8",
+        "max_duration": "uint32"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "is_recording": "boolean"
+      },
+      "constants": {
+        "REQUEST_QUERY_STATUS": 3,
+        "REQUEST_START_RECORD": 1,
+        "REQUEST_STOP_RECORD": 2
+      },
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/navigate_to_target",
+      "type": "function_msgs/srv/NavigateToTarget",
+      "enabled": false,
+      "request": {
+        "target_name": "string",
+        "distance_threshold": "float"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "selected_x": "float",
+        "selected_y": "float",
+        "selected_distance": "float"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/odom_qr_controller/start_charging_navigation",
+      "type": "std_srvs/srv/SetBool",
+      "enabled": false,
+      "request": {
+        "data": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/query_map",
+      "type": "slam_msgs/srv/QueryMap",
+      "enabled": false,
+      "request": {
+        "stamp": "builtin_interfaces/Time",
+        "mode": "uint8",
+        "camera_id": "int32",
+        "pixel": "geometry_msgs/Point",
+        "radius": "float",
+        "hor_fov": "float",
+        "ver_fov": "float",
+        "dir_cam": "geometry_msgs/Vector3",
+        "max_points": "uint32"
+      },
+      "response": {
+        "success": "boolean",
+        "error_code": "uint32",
+        "message": "string",
+        "header": "std_msgs/Header",
+        "cloud": "sensor_msgs/PointCloud2",
+        "point_count_raw": "uint32",
+        "point_count_after_filter": "uint32",
+        "matched_time_diff_ms": "float"
+      },
+      "constants": {
+        "QUERY_MODE_FOV": 0,
+        "QUERY_MODE_PIXEL": 1
+      },
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/rcp/execute_task/_action/cancel_goal",
+      "type": "action_msgs/srv/CancelGoal",
+      "enabled": false,
+      "request": {
+        "goal_info": "action_msgs/GoalInfo"
+      },
+      "response": {
+        "return_code": "int8",
+        "goals_canceling": "sequence<action_msgs/GoalInfo>"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/rcp/execute_task/_action/get_result",
+      "type": "function_msgs/action/RcpTask_GetResult",
+      "enabled": false,
+      "schema_error": "module 'function_msgs.action' has no attribute 'RcpTask_GetResult'",
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/rcp/execute_task/_action/send_goal",
+      "type": "function_msgs/action/RcpTask_SendGoal",
+      "enabled": false,
+      "schema_error": "module 'function_msgs.action' has no attribute 'RcpTask_SendGoal'",
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/rcp/interaction/set_rule_switches",
+      "type": "function_msgs/srv/SetRuleSwitches",
+      "enabled": false,
+      "request": {
+        "switches": "sequence<function_msgs/RuleSwitchEntry>",
+        "source_node": "string"
+      },
+      "response": {
+        "ok": "boolean",
+        "message": "string",
+        "applied": "sequence<function_msgs/RuleSwitchEntry>",
+        "rejected": "sequence<function_msgs/RuleSwitchEntry>"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/report_monitor_action",
+      "type": "software_msgs/srv/FaultArray",
+      "enabled": false,
+      "request": {
+        "fault_array": "sequence<software_msgs/FaultStatus>"
+      },
+      "response": {
+        "error_code": "int32",
+        "desc": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/s100/get_init_state_trans_res",
+      "type": "software_msgs/srv/GetInitMachineStateTransResult",
+      "enabled": false,
+      "request": {},
+      "response": {
+        "result": "int32"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/s100/ota/trigger",
+      "type": "software_msgs/srv/TriggerOTA",
+      "enabled": false,
+      "request": {
+        "manifest_path": "string",
+        "phase": "int32"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/s100/restart_process",
+      "type": "software_msgs/srv/RestartProcess",
+      "enabled": false,
+      "request": {
+        "process_name": "string"
+      },
+      "response": {
+        "error_code": "int32"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/s100/set_state",
+      "type": "software_msgs/srv/SetState",
+      "enabled": false,
+      "request": {
+        "fg_name": "string",
+        "curr_state": "string",
+        "target_state": "string"
+      },
+      "response": {
+        "error_code": "int32"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/set_counter_debounce",
+      "type": "software_msgs/srv/CounterDebounceArray",
+      "enabled": false,
+      "request": {
+        "counter_debounce_array": "sequence<software_msgs/CounterDebounce>"
+      },
+      "response": {
+        "error_code": "int32",
+        "desc": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/set_loop",
+      "type": "function_msgs/srv/SetLoop",
+      "enabled": false,
+      "request": {
+        "sampling_mode": "uint8",
+        "predefined_actions_filename": "string",
+        "dag_nodes_json": "sequence<string>",
+        "reset_sampling_state": "boolean",
+        "mean_interval": "float",
+        "min_interval": "float",
+        "max_interval": "float"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "uint8",
+        "total_actions_available": "uint32",
+        "remaining_actions": "uint32",
+        "active_interval": "float"
+      },
+      "constants": {
+        "SAMPLING_SEQUENTIAL": 2,
+        "SAMPLING_WITHOUT_REPLACEMENT": 1,
+        "SAMPLING_WITH_REPLACEMENT": 0
+      },
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/set_slam_mode",
+      "type": "slam_msgs/srv/SetSlamMode",
+      "enabled": false,
+      "request": {
+        "mode": "uint8",
+        "request_reloc": "boolean",
+        "map_name": "string",
+        "client_id": "string",
+        "client_req_id": "uint64"
+      },
+      "response": {
+        "accepted": "boolean",
+        "message": "string",
+        "server_task_id": "uint64"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/set_speak",
+      "type": "function_msgs/srv/SetSpeak",
+      "enabled": true,
+      "request": {
+        "target_state": "uint8",
+        "mode": "uint8",
+        "req_id": "string",
+        "pre_check": "boolean",
+        "machine_language_name": "string",
+        "human_language_text": "string"
+      },
+      "response": {
+        "success": "boolean",
+        "error_code": "int32",
+        "message": "string"
+      },
+      "constants": {
+        "HUMAN_VOICE": 1,
+        "MACHINE_LANGUAGE": 0
+      },
+      "integration": "bridge_enabled",
+      "physical_validation": "speaker_works_for_native_touch_bark_custom_playback_unconfirmed",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/set_timer_debounce",
+      "type": "software_msgs/srv/TimerDebounceArray",
+      "enabled": false,
+      "request": {
+        "timer_debounce_array": "sequence<software_msgs/TimerDebounce>"
+      },
+      "response": {
+        "error_code": "int32",
+        "desc": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/sim_card_id",
+      "type": "std_srvs/srv/Trigger",
+      "enabled": false,
+      "request": {},
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/sm/action/lowlevel",
+      "type": "software_msgs/srv/LowlevelAction",
+      "enabled": true,
+      "request": {
+        "target_state": "uint8",
+        "mode": "uint8",
+        "req_id": "string",
+        "pre_check": "boolean",
+        "action_path": "string",
+        "action_params_json": "string"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "int32"
+      },
+      "constants": {
+        "DAMPER": 11,
+        "FIXED_LAYDOWN": 2,
+        "FIXED_STAND": 1,
+        "MPC": 7,
+        "PASSIVE": 0,
+        "PILOT": 9,
+        "QUIET_PASSIVE": 12,
+        "RL": 5,
+        "RL_ACTION_POLICY1": 100,
+        "RL_ACTION_POLICY2": 101,
+        "RL_ACTION_POLICY3": 102,
+        "RL_ACTION_POLICY4": 103,
+        "RL_RECOVERY": 10,
+        "RL_TROT": 6,
+        "SAFE_LAYDOWN_SEQUENCE": 4,
+        "SAFE_STOP_SEQUENCE": 3,
+        "STREAM": 8
+      },
+      "integration": "bridge_enabled",
+      "physical_validation": "stand_confirmed_by_user_only",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/sm/event",
+      "type": "software_msgs/srv/CommonEvent",
+      "enabled": false,
+      "request": {
+        "event_id": "int32",
+        "timestamp": "int64",
+        "source_module": "int32",
+        "priority": "int32",
+        "detail_status": "int32"
+      },
+      "response": {
+        "error_code": "int32"
+      },
+      "constants": {
+        "EVENTDETAILSTATUS_FAILED": 4,
+        "EVENTDETAILSTATUS_FAILURE": 1,
+        "EVENTDETAILSTATUS_INFO": 3,
+        "EVENTDETAILSTATUS_SUCCESS": 0,
+        "EVENTDETAILSTATUS_TIMEOUT": 5,
+        "EVENTDETAILSTATUS_WARNING": 2,
+        "EVENTID_EV_EM_LAUNCH_FAILED": 3,
+        "EVENTID_EV_EM_LAUNCH_SUCCESS": 2,
+        "EVENTID_EV_HARDWARE_CHECK_FAILED": 1,
+        "EVENTID_EV_HARDWARE_CHECK_SUCCESS": 0,
+        "EVENTID_EV_LOCOMOTION_ACTION_ERROR": 5,
+        "EVENTID_EV_LOCOMOTION_ACTION_OK": 4,
+        "EVENTID_EV_SYSTEM_OVER_LOAD": 6,
+        "EVENTID_EV_SYSTEM_RECOVERY_FAILED": 8,
+        "EVENTID_EV_SYSTEM_RECOVERY_SUCCESS": 7,
+        "MODULEID_HMI": 1,
+        "MODULEID_LOCOMOTION": 2,
+        "MODULEID_SMC": 0,
+        "PRIORITY_HIGH": 3,
+        "PRIORITY_LOW": 0,
+        "PRIORITY_MEDIUM": 2,
+        "PRIORITY_NORMAL": 1
+      },
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/software/em/report_execution_state",
+      "type": "software_msgs/srv/ReportExecutionState",
+      "enabled": false,
+      "request": {
+        "service_name": "string",
+        "state": "uint8"
+      },
+      "response": {
+        "error_code": "int32"
+      },
+      "constants": {
+        "RUNNING": 0,
+        "TERMINATING": 1
+      },
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/software/faultmgr/set_processing",
+      "type": "std_srvs/srv/SetBool",
+      "enabled": false,
+      "request": {
+        "data": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/software/sm/get_fg_state",
+      "type": "software_msgs/srv/GetFgState",
+      "enabled": true,
+      "request": {
+        "fg_name": "string"
+      },
+      "response": {
+        "error_code": "int32",
+        "state": "string",
+        "mode": "string"
+      },
+      "constants": {},
+      "integration": "bridge_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/soul_dancer/process_music",
+      "type": "function_msgs/srv/BaseTrigger",
+      "enabled": false,
+      "request": {
+        "enable": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "error_code": "uint8"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/speech_command_word",
+      "type": "speech_msgs/srv/CommandWord",
+      "enabled": false,
+      "request": {
+        "timestamp": "builtin_interfaces/Time",
+        "command_type": "uint8",
+        "command_text": "string",
+        "slot_count": "uint32",
+        "slot_values": "sequence<string>"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {
+        "COMMAND_TYPE_OFFLINE": 0,
+        "COMMAND_TYPE_ONLINE": 1
+      },
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/speech_control",
+      "type": "speech_msgs/srv/SpeechControl",
+      "enabled": false,
+      "request": {
+        "request_type": "uint8",
+        "enable": "boolean",
+        "mode": "uint8"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "cmd_recognition_status": "boolean",
+        "cmd_recognition_mode": "uint8",
+        "chat_function_status": "boolean",
+        "continuous_cmd_status": "boolean"
+      },
+      "constants": {
+        "CMD_RECOGNITION_MODE_DOUBAO_ASR": 2,
+        "CMD_RECOGNITION_MODE_OFF": 0,
+        "CMD_RECOGNITION_MODE_SPEECH_SERVICE": 1,
+        "MODE__DEFAULT": 0,
+        "NOTIFY_ACTION_OFF": 8,
+        "NOTIFY_ACTION_ON": 7,
+        "NOTIFY_AVATAR_OFF": 10,
+        "NOTIFY_AVATAR_ON": 9,
+        "NOTIFY_LOW_POWER_VOICE_DISABLE_OFF": 14,
+        "NOTIFY_LOW_POWER_VOICE_DISABLE_ON": 13,
+        "NOTIFY_NAVIGATION_OFF": 12,
+        "NOTIFY_NAVIGATION_ON": 11,
+        "NOTIFY_RTC_OFF": 16,
+        "NOTIFY_RTC_ON": 15,
+        "REQUEST_QUERY_CHAT_FUNCTION": 2,
+        "REQUEST_QUERY_CMD_RECOGNITION": 1,
+        "REQUEST_QUERY_CONTINUOUS_CMD": 5,
+        "REQUEST_SET_CHAT_FUNCTION": 4,
+        "REQUEST_SET_CMD_RECOGNITION": 3,
+        "REQUEST_SET_CONTINUOUS_CMD": 6
+      },
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/speech_service/auth_activate",
+      "type": "speech_msgs/srv/AuthActivate",
+      "enabled": false,
+      "request": {
+        "serial_number": "string"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/speech_text_data",
+      "type": "speech_msgs/srv/SpeechTextData",
+      "enabled": false,
+      "request": {
+        "data_type": "uint8",
+        "text": "string",
+        "sn": "string",
+        "timestamp": "builtin_interfaces/Time"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {
+        "TYPE_ASR": 1,
+        "TYPE_NLU": 3,
+        "TYPE_OFFLINE_CMD": 7,
+        "TYPE_ONLINE_CMD": 6,
+        "TYPE_TTS": 2,
+        "TYPE_WAKEUP_BUTTON": 5,
+        "TYPE_WAKEUP_VOICE": 4
+      },
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/system/power_saving/enable",
+      "type": "std_srvs/srv/SetBool",
+      "enabled": false,
+      "request": {
+        "data": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/system/power_saving/set_policy",
+      "type": "software_msgs/srv/SetPowerSaving",
+      "enabled": false,
+      "request": {
+        "type": "uint8",
+        "enable": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {
+        "TYPE_CHARGING_SLEEP": 1,
+        "TYPE_POSE_SLEEP": 2
+      },
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/touch_node/butt_enable",
+      "type": "std_srvs/srv/SetBool",
+      "enabled": false,
+      "request": {
+        "data": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/touch_node/butt_enable_state",
+      "type": "peripheral_msgs/srv/QueryState",
+      "enabled": false,
+      "request": {},
+      "response": {
+        "enable": "boolean",
+        "value": "uint8",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/traj_to_cmd/set_factory_mode",
+      "type": "std_srvs/srv/SetBool",
+      "enabled": false,
+      "request": {
+        "data": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/trigger_data_save/recorder",
+      "type": "software_msgs/srv/TriggerMcap",
+      "enabled": false,
+      "request": {
+        "timestamp": "int64",
+        "rule_group": "string",
+        "rule": "string",
+        "topics": "sequence<string>"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/trigger_data_save/uploader",
+      "type": "software_msgs/srv/TriggerUploader",
+      "enabled": false,
+      "request": {
+        "file_list": "sequence<string>"
+      },
+      "response": {
+        "uploaded_files": "sequence<string>",
+        "failed_files": "sequence<string>"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/uwb/find_tag",
+      "type": "std_srvs/srv/Trigger",
+      "enabled": false,
+      "request": {},
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/uwb/head_touch_enable",
+      "type": "std_srvs/srv/SetBool",
+      "enabled": false,
+      "request": {
+        "data": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/uwb/pair_tag",
+      "type": "uwb_msgs/srv/Pair",
+      "enabled": false,
+      "request": {
+        "tag_name": "string",
+        "precode": "uint8"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/uwb/remove_tag",
+      "type": "std_srvs/srv/Trigger",
+      "enabled": false,
+      "request": {},
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/voiceprint_control",
+      "type": "speech_msgs/srv/VoiceprintControl",
+      "enabled": false,
+      "request": {
+        "enable": "boolean"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/volume_control",
+      "type": "speech_msgs/srv/VolumeControl",
+      "enabled": false,
+      "request": {
+        "app_name": "string",
+        "volume": "uint8"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "current_volume": "uint8"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/wifi_control",
+      "type": "peripheral_msgs/srv/WifiControl",
+      "enabled": false,
+      "request": {
+        "op": "uint8",
+        "ssid": "string",
+        "password": "string"
+      },
+      "response": {
+        "success": "boolean",
+        "signal": "int8",
+        "mac": "string",
+        "message": "string"
+      },
+      "constants": {
+        "CONNECT": 1,
+        "DISCONNECT": 0
+      },
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/write_x5_file",
+      "type": "software_msgs/srv/WriteFile",
+      "enabled": false,
+      "request": {
+        "path": "string",
+        "content": "string"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/x5/efuse",
+      "type": "peripheral_msgs/srv/EfuseControl",
+      "enabled": false,
+      "request": {
+        "operation": "uint8",
+        "pn_code": "string"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "pn_code": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Maintenance or task protocol: inspect specific scope, not an autonomous pet skill"
+    },
+    {
+      "name": "/x5/get_init_state_trans_res",
+      "type": "software_msgs/srv/GetInitMachineStateTransResult",
+      "enabled": false,
+      "request": {},
+      "response": {
+        "result": "int32"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/x5/restart_process",
+      "type": "software_msgs/srv/RestartProcess",
+      "enabled": false,
+      "request": {
+        "process_name": "string"
+      },
+      "response": {
+        "error_code": "int32"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/x5/set_state",
+      "type": "software_msgs/srv/SetState",
+      "enabled": false,
+      "request": {
+        "fg_name": "string",
+        "curr_state": "string",
+        "target_state": "string"
+      },
+      "response": {
+        "error_code": "int32"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/x5/start_init",
+      "type": "std_srvs/srv/Trigger",
+      "enabled": false,
+      "request": {},
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    },
+    {
+      "name": "/x5/write_hostname",
+      "type": "peripheral_msgs/srv/EfuseControl",
+      "enabled": false,
+      "request": {
+        "operation": "uint8",
+        "pn_code": "string"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "pn_code": "string"
+      },
+      "constants": {},
+      "integration": "inventoried_not_enabled",
+      "physical_validation": "unverified",
+      "autonomy_enabled": false,
+      "next_gate": "Validate fields, preconditions, cancel semantics and physical outcome before execution"
+    }
+  ],
+  "topics": [
+    {
+      "name": "/adapter/vel_cmd",
+      "types": [
+        "geometry_msgs/msg/Twist"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/adapter/wz",
+      "types": [
+        "std_msgs/msg/Float32"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/adc_info",
+      "types": [
+        "software_msgs/msg/AdcInfo"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/alignment_service/status",
+      "types": [
+        "function_msgs/msg/ChargingAlignmentStatus"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/app_agent/inbound_event",
+      "types": [
+        "std_msgs/msg/String"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/ble/neighbors",
+      "types": [
+        "software_msgs/msg/KeyValueArray"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/bms_state",
+      "types": [
+        "lowlevel_msg/msg/BmsState"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/cloud_agent/download_package/_action/feedback",
+      "types": [
+        "software_msgs/action/DownloadPackage_FeedbackMessage"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/cloud_agent/download_package/_action/status",
+      "types": [
+        "action_msgs/msg/GoalStatusArray"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/cloud_agent/local_download_progress",
+      "types": [
+        "std_msgs/msg/Int32"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/cloud_agent/ota_package_download_failed",
+      "types": [
+        "std_msgs/msg/Bool"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/cloud_agent/remote_download_progress",
+      "types": [
+        "std_msgs/msg/Int32"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/data_loop_trigger",
+      "types": [
+        "software_msgs/msg/DataLoopTrigger"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/depth/mono",
+      "types": [
+        "sensor_msgs/msg/Image"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/depth/mono_relative",
+      "types": [
+        "sensor_msgs/msg/Image"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/depth/mono_scale_info",
+      "types": [
+        "std_msgs/msg/Float32MultiArray"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/display_info",
+      "types": [
+        "peripheral_msgs/msg/DisplayInfo"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/display_node/status",
+      "types": [
+        "std_msgs/msg/String"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/dvr/status",
+      "types": [
+        "dvr_msgs/msg/DvrStatus"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/firmware_versions",
+      "types": [
+        "firmware_version_msgs/msg/FirmwareVersions"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/function/body_action_status",
+      "types": [
+        "function_msgs/msg/BodyActionStatus"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/function/context/context_event",
+      "types": [
+        "function_msgs/msg/ContextEvent"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/function/context/context_snapshot",
+      "types": [
+        "function_msgs/msg/ContextSnapShot"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/function/trace_events",
+      "types": [
+        "function_msgs/msg/TraceEvent"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/gnss/cell_info",
+      "types": [
+        "std_msgs/msg/String"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/gnss/fix",
+      "types": [
+        "sensor_msgs/msg/NavSatFix"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/gnss/fusion",
+      "types": [
+        "sensor_msgs/msg/NavSatFix"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/gnss/raw",
+      "types": [
+        "peripheral_msgs/msg/GnssRaw"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/gps/phone",
+      "types": [
+        "sensor_msgs/msg/NavSatFix"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/grid_map/compressed",
+      "types": [
+        "sensor_msgs/msg/CompressedImage"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/image_left_raw/h265",
+      "types": [
+        "foxglove_msgs/msg/CompressedVideo"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/image_left_raw/h265_half",
+      "types": [
+        "foxglove_msgs/msg/CompressedVideo"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/image_left_raw/h265_quarter",
+      "types": [
+        "foxglove_msgs/msg/CompressedVideo"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/image_left_raw/h265_undistort",
+      "types": [
+        "foxglove_msgs/msg/CompressedVideo"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/image_left_raw/nv12",
+      "types": [
+        "sensor_msgs/msg/Image"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/image_left_raw/nv12_half",
+      "types": [
+        "sensor_msgs/msg/Image"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/image_left_raw/nv12_quarter",
+      "types": [
+        "sensor_msgs/msg/Image"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/image_right_raw/h265",
+      "types": [
+        "foxglove_msgs/msg/CompressedVideo"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/image_right_raw/h265_half",
+      "types": [
+        "foxglove_msgs/msg/CompressedVideo"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/image_right_raw/h265_quarter",
+      "types": [
+        "foxglove_msgs/msg/CompressedVideo"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/image_right_raw/nv12",
+      "types": [
+        "sensor_msgs/msg/Image"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/image_right_raw/nv12_half",
+      "types": [
+        "sensor_msgs/msg/Image"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/image_right_raw/nv12_quarter",
+      "types": [
+        "sensor_msgs/msg/Image"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/imu_raw",
+      "types": [
+        "sensor_msgs/msg/Imu"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/imu_raw_x5",
+      "types": [
+        "sensor_msgs/msg/Imu"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/infrared/camera_info",
+      "types": [
+        "sensor_msgs/msg/CameraInfo"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/infrared_camera/image_raw",
+      "types": [
+        "sensor_msgs/msg/Image"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/infrared_camera/video_h265",
+      "types": [
+        "foxglove_msgs/msg/CompressedVideo"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/joy",
+      "types": [
+        "sensor_msgs/msg/Joy"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/l4/task_report",
+      "types": [
+        "std_msgs/msg/String"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/lf/lowstate",
+      "types": [
+        "lowlevel_msg/msg/LowState"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/lidar_device_ctrl_state",
+      "types": [
+        "vanjee_lidar_msg/msg/DeviceCtrl"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/lidar_imu",
+      "types": [
+        "sensor_msgs/msg/Imu"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/lidar_packets",
+      "types": [
+        "vanjee_lidar_msg/msg/VanjeelidarPacket"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/lidar_points",
+      "types": [
+        "sensor_msgs/msg/PointCloud2"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/light/ear_modulation",
+      "types": [
+        "std_msgs/msg/Float32"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/locomotion/business_event",
+      "types": [
+        "std_msgs/msg/String"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/locomotion/debug/inject_fault",
+      "types": [
+        "std_msgs/msg/String"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/locomotion/event",
+      "types": [
+        "software_msgs/msg/LocomotionEvent"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/locomotion/external_command",
+      "types": [
+        "lowlevel_msg/msg/LowCmd"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/locomotion/head/debug/temp_override",
+      "types": [
+        "std_msgs/msg/String"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/locomotion/head/status",
+      "types": [
+        "std_msgs/msg/String"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/locomotion/status",
+      "types": [
+        "software_msgs/msg/LocomotionStatus"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/locomotion/task_report",
+      "types": [
+        "std_msgs/msg/String"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/log_upload_trigger",
+      "types": [
+        "software_msgs/msg/LogUploadTrigger"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/lowlevel/metrics",
+      "types": [
+        "lowlevel_msg/msg/LowlevelMetrics"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/lowlevel_feedback",
+      "types": [
+        "lowlevel_msg/msg/LowlevelFeedback"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/navigation_status",
+      "types": [
+        "std_msgs/msg/Bool"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/odom_qr_controller/service_active",
+      "types": [
+        "std_msgs/msg/Bool"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/odometry",
+      "types": [
+        "nav_msgs/msg/Odometry"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/ota/progress",
+      "types": [
+        "std_msgs/msg/Int32"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/ota_version",
+      "types": [
+        "std_msgs/msg/String"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/parameter_events",
+      "types": [
+        "rcl_interfaces/msg/ParameterEvent"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/path",
+      "types": [
+        "nav_msgs/msg/Path"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/perception/costmap",
+      "types": [
+        "sensor_msgs/msg/Image"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/perception/detections2d",
+      "types": [
+        "vision_msgs/msg/Detection2DArray"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/perception/poses",
+      "types": [
+        "vision_msgs/msg/PoseDetection"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/pilot/state",
+      "types": [
+        "std_msgs/msg/Int32"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/platform_state_s100",
+      "types": [
+        "lowlevel_msg/msg/PlatformState"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/platform_state_x5",
+      "types": [
+        "lowlevel_msg/msg/PlatformState"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/raw_audio_dump",
+      "types": [
+        "foxglove_msgs/msg/RawAudio"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/rcp/execute_task/_action/feedback",
+      "types": [
+        "function_msgs/action/RcpTask_FeedbackMessage"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/rcp/execute_task/_action/status",
+      "types": [
+        "action_msgs/msg/GoalStatusArray"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/rcp/submit_task",
+      "types": [
+        "std_msgs/msg/String"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/rcp/task_status",
+      "types": [
+        "std_msgs/msg/String"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/rcp/trace",
+      "types": [
+        "function_msgs/msg/TraceEvent"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/recv_lidar_parameter_cmd_topic",
+      "types": [
+        "vanjee_lidar_msg/msg/LidarParameterInterface"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/rosout",
+      "types": [
+        "rcl_interfaces/msg/Log"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/rt/lowstate",
+      "types": [
+        "lowlevel_msg/msg/LowState"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/s100/process_state_change",
+      "types": [
+        "software_msgs/msg/ProcessStateChange"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/s100/process_state_change_list",
+      "types": [
+        "software_msgs/msg/ProcessStateChangeList"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/s100/static_syslog",
+      "types": [
+        "rcl_interfaces/msg/Log"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/s100/vlog",
+      "types": [
+        "rcl_interfaces/msg/Log"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/s100/vlog_batch",
+      "types": [
+        "software_msgs/msg/LogBatch"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/semantic_map",
+      "types": [
+        "sensor_msgs/msg/PointCloud2"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/semantic_nav/direction",
+      "types": [
+        "geometry_msgs/msg/Vector3Stamped"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/semantic_nav/point_2d",
+      "types": [
+        "geometry_msgs/msg/PointStamped"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/semantic_nav/point_3d",
+      "types": [
+        "geometry_msgs/msg/PointStamped"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/send_lidar_parameter_topic",
+      "types": [
+        "vanjee_lidar_msg/msg/LidarParameterInterface"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/servo/status",
+      "types": [
+        "lowlevel_msg/msg/ServoStatuses"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/signal_quality_4g",
+      "types": [
+        "peripheral_msgs/msg/SignalQuality"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/signal_quality_wifi",
+      "types": [
+        "std_msgs/msg/Int32"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/slam/status",
+      "types": [
+        "slam_msgs/msg/SlamStatus"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/software/faultmgr/report/app",
+      "types": [
+        "foxglove_msgs/msg/FaultTypeArray"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/software/faultmgr/report/sm",
+      "types": [
+        "foxglove_msgs/msg/FaultTypeArray"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/software/faultmgr/report_fault",
+      "types": [
+        "software_msgs/msg/FaultStatusArray"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/software/faultmgr/report_record_system",
+      "types": [
+        "software_msgs/msg/FaultInfo"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/software/faultmgr/upload_fmc",
+      "types": [
+        "software_msgs/msg/FaultStatusArray"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/software/faultmgr/upload_monitor",
+      "types": [
+        "diagnostic_msgs/msg/DiagnosticArray"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/software/faultmgr/upload_viz_type",
+      "types": [
+        "diagnostic_msgs/msg/DiagnosticArray"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/software/trigger/trigger_event",
+      "types": [
+        "foxglove_msgs/msg/TriggerEvent"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/software/trigger/trigger_notify",
+      "types": [
+        "foxglove_msgs/msg/TriggerNotify"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/speech/ChatTtsNotification",
+      "types": [
+        "speech_msgs/msg/ChatTtsNotification"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/speech/command_word",
+      "types": [
+        "speech_msgs/msg/CommandWord"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/speech/listen_event",
+      "types": [
+        "speech_msgs/msg/SpeechListenEvent"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/speech/uwb_level",
+      "types": [
+        "std_msgs/msg/UInt16"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/speech/voice_level",
+      "types": [
+        "std_msgs/msg/UInt16"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/speech/wakeup_info",
+      "types": [
+        "speech_msgs/msg/WakeupInfo"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/speech_dog_to_phone",
+      "types": [
+        "speech_msgs/msg/SpeechDogToPhone"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/speech_phone_to_dog",
+      "types": [
+        "speech_msgs/msg/SpeechPhoneToDog"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/stereo/left/isp_status",
+      "types": [
+        "camera_msgs/msg/Isp2AStatus"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/stereo/right/isp_status",
+      "types": [
+        "camera_msgs/msg/Isp2AStatus"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/stereo_apriltag/detection",
+      "types": [
+        "function_msgs/msg/StereoTagDetection"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/stereo_apriltag/enable",
+      "types": [
+        "std_msgs/msg/Bool"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/stereo_left/camera_info",
+      "types": [
+        "sensor_msgs/msg/CameraInfo"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/stereo_right/camera_info",
+      "types": [
+        "sensor_msgs/msg/CameraInfo"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/system/sm_status",
+      "types": [
+        "software_msgs/msg/SystemStateMachineStatus"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/system/sm_structure",
+      "types": [
+        "std_msgs/msg/String"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/tf",
+      "types": [
+        "tf2_msgs/msg/TFMessage"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/tf_static",
+      "types": [
+        "tf2_msgs/msg/TFMessage"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/touch_node/touch_event",
+      "types": [
+        "peripheral_msgs/msg/TouchState"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/touch_node/touch_state",
+      "types": [
+        "peripheral_msgs/msg/TouchState"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/traj_to_cmd/debug/original_trajectory",
+      "types": [
+        "nav_msgs/msg/Path"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/traj_to_cmd/debug/post_processed_trajectory",
+      "types": [
+        "nav_msgs/msg/Path"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/uwb/data",
+      "types": [
+        "uwb_location/msg/UWB"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/uwb/state",
+      "types": [
+        "uwb_msgs/msg/Status"
+      ],
+      "subscription_enabled": true
+    },
+    {
+      "name": "/vanjee_lidar_diagnostic_status_upload",
+      "types": [
+        "diagnostic_msgs/msg/DiagnosticArray"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/vel_cmd",
+      "types": [
+        "geometry_msgs/msg/Twist"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/vita/audio/raw",
+      "types": [
+        "foxglove_msgs/msg/RawAudio"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/vln_map",
+      "types": [
+        "std_msgs/msg/UInt8MultiArray"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/vln_path",
+      "types": [
+        "nav_msgs/msg/Path"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/x5/process_state_change",
+      "types": [
+        "software_msgs/msg/ProcessStateChange"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/x5/process_state_change_list",
+      "types": [
+        "software_msgs/msg/ProcessStateChangeList"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/x5/static_syslog",
+      "types": [
+        "rcl_interfaces/msg/Log"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/x5/vlog",
+      "types": [
+        "rcl_interfaces/msg/Log"
+      ],
+      "subscription_enabled": false
+    },
+    {
+      "name": "/x5/vlog_batch",
+      "types": [
+        "software_msgs/msg/LogBatch"
+      ],
+      "subscription_enabled": false
+    }
+  ],
+  "native_actions": [
+    {
+      "file": "BACK_OFF.json",
+      "task_id": "make_face_fear",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY2",
+        "head.STREAM",
+        "emotion.FEAR_COURAGE",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "BOW_NEW_YEAR.json",
+      "task_id": "BOW_NEW_YEAR",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "speak.MACHINE_LANGUAGE",
+        "emotion.STREAM",
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.new_year",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "BOW_NEW_YEAR_STORE.json",
+      "task_id": "BOW_NEW_YEAR",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.new_year",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "CHASE_BALL.json",
+      "task_id": "CHASE_BALL",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "CHEEKY.json",
+      "task_id": "CHEEKY",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "CHEER_L.json",
+      "task_id": "cheer_l",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.COURAGE",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "CHEER_R.json",
+      "task_id": "cheer_r",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.COURAGE",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "CONDUCT.json",
+      "task_id": "CONDUCT",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY2",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "CRAWL.json",
+      "task_id": "CRAWL",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "CURIOUS.json",
+      "task_id": "CURIOUS",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "DIG_HOLE.json",
+      "task_id": "DIG_HOLE",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "DIZZINESS.json",
+      "task_id": "make_face_dizzy",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.DIZZY",
+        "light.FIXEDCOLOR",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "DOG_BARK.json",
+      "task_id": "DOG_BARK",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.dog_barking",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "DRUMER.json",
+      "task_id": "rockyou_short",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.ANGRY",
+        "light.FIXEDCOLOR",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "ENJOY.json",
+      "task_id": "ENJOY",
+      "resources": [
+        "SCREEN",
+        "LEGS",
+        "LIGHT"
+      ],
+      "tasks": [
+        "emotion.HAPPY_10S"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "EXCITED.json",
+      "task_id": "head_basic_up",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "FORTUNE_CAT.json",
+      "task_id": "say_hi",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.say_hi",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "FORTUNE_CAT_L.json",
+      "task_id": "say_hi",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.say_hi",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "GRIEVANCE.json",
+      "task_id": "GRIEVANCE",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.fear",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "GRIEVANCE_APP.json",
+      "task_id": "GRIEVANCE",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.fear",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "GRIEVANCE_NOBODY.json",
+      "task_id": "GRIEVANCE",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "emotion.fear",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "HAPPYBIRTHDAY.json",
+      "task_id": "happybirthday",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.happy_birthday",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "HAPPY_BOUNCE_B.json",
+      "task_id": "HAPPY_BOUNCE_B",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY2",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "HAPPY_JUMP.json",
+      "task_id": "HAPPY_BOUNCE",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY2",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "HAPPY_LITTLE_JUMP.json",
+      "task_id": "HAPPY_LITTLE_JUMP",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "HIGH_FIVE_L.json",
+      "task_id": "HIGH_FIVE_L",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.high_five",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "HIGH_FIVE_R.json",
+      "task_id": "HIGH_FIVE_R",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.high_five",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "HOWL_LIKE_WOLF.json",
+      "task_id": "HOWL_LIKE_WOLF",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "IDENTIFY.json",
+      "task_id": "IDENTIFY",
+      "resources": [
+        "SCREEN",
+        "LEGS",
+        "LIGHT"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "emotion.WINK",
+        "light.FIXEDCOLOR",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "JUMP_AHEAD.json",
+      "task_id": "JUMP_AHEAD",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "speak.MACHINE_LANGUAGE",
+        "emotion.STREAM",
+        "body.RL_ACTION_POLICY2",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "JUMP_FORWARD.json",
+      "task_id": "JUMP_FORWARD",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "speak.MACHINE_LANGUAGE",
+        "emotion.STREAM",
+        "body.RL_ACTION_POLICY2",
+        "head.STREAM",
+        "emotion.lunge_forward",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "JUMP_FORWARD_STORE.json",
+      "task_id": "JUMP_FORWARD",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY2",
+        "head.STREAM",
+        "emotion.lunge_forward",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "JUMP_IN_PLACE.json",
+      "task_id": "JUMP_IN_PLACE",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "speak.MACHINE_LANGUAGE",
+        "emotion.STREAM",
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.courage",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "JUMP_IN_PLACE_STORE.json",
+      "task_id": "JUMP_IN_PLACE",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.courage",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "LICK_HAND.json",
+      "task_id": "LICK_HAND",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "LOOKAROUND.json",
+      "task_id": "lookaround",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "LOOKFORWARD.json",
+      "task_id": "lookforward",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "LOOKLEFT.json",
+      "task_id": "lookleft",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "LOOKRIGHT.json",
+      "task_id": "lookright",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "NEWYEAR_GREETING.json",
+      "task_id": "NEWYEAR_GREETING",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "speak.MACHINE_LANGUAGE",
+        "emotion.STREAM",
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "NEWYEAR_GREETING_STORE.json",
+      "task_id": "NEWYEAR_GREETING",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "PARTROLALERT.json",
+      "task_id": "PARTROLALERT",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "head.STREAM",
+        "emotion.BLINK_ONCE",
+        "emotion.CONFOUND_3S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "PEE.json",
+      "task_id": "pee",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.BLINK_ONCE",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "PILATES_D.json",
+      "task_id": "PILATES_D",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "POSE_C.json",
+      "task_id": "POSE_C",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY2",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "POSE_D.json",
+      "task_id": "POSE_D",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY2",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "POSE_E.json",
+      "task_id": "POSE_E",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY2",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "POSE_F.json",
+      "task_id": "POSE_F",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY2",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "PUSHUP.json",
+      "task_id": "pushup",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.SHY",
+        "light.GRADIENT",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "RELAXED_SWING.json",
+      "task_id": "RELAXED_SWING",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "REPORT.json",
+      "task_id": "REPORT",
+      "resources": [
+        "SCREEN",
+        "LEGS",
+        "LIGHT"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "emotion.WINK",
+        "light.FIXEDCOLOR",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "RHYTHM.json",
+      "task_id": "rhythm",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.rhythmic_swing",
+        "light.FIXEDCOLOR",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "RHYTHMIC_SWING.json",
+      "task_id": "RHYTHMIC_SWING",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "ROCKYOU.json",
+      "task_id": "rockyou_30s",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "speak.MACHINE_LANGUAGE",
+        "emotion.STREAM",
+        "body.RL_ACTION_POLICY3",
+        "head.STREAM",
+        "emotion.ROCKYOU",
+        "light.FIXEDCOLOR",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "ROCKYOU_STORE.json",
+      "task_id": "rockyou_30s",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY3",
+        "head.STREAM",
+        "emotion.ROCKYOU",
+        "light.FIXEDCOLOR",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "RUB_LEG_L.json",
+      "task_id": "RUB_LEG_L",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "RUB_LEG_R.json",
+      "task_id": "RUB_LEG_R",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "SAYNO.json",
+      "task_id": "sayno",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "SAYYES.json",
+      "task_id": "sayyes",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "SCRATCH_HEAD_L.json",
+      "task_id": "scratch_head_l",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.SWEATY",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "SCRATCH_HEAD_R.json",
+      "task_id": "scratch_head_r",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.SWEATY",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "SELF_INTRODUCTION.json",
+      "task_id": "SELF_INTRODUCTION",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.STREAM",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "SHAKEHAND.json",
+      "task_id": "action_shakehands",
+      "resources": [
+        "SCREEN",
+        "LEGS",
+        "LIGHT"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "emotion.happy",
+        "light.FIXEDCOLOR",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "SHAKEHAND_L.json",
+      "task_id": "action_shakehands",
+      "resources": [
+        "SCREEN",
+        "LEGS",
+        "LIGHT"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "emotion.happy",
+        "light.FIXEDCOLOR",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "SITUP.json",
+      "task_id": "sit_up",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "SMELL.json",
+      "task_id": "SMELL",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "SOULDANCER.json",
+      "task_id": "strech",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.BLINK_ONCE",
+        "emotion.BLINK_ONCE",
+        "light.GRADIENT",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "STRETCH_SLEEP.json",
+      "task_id": "strech",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.SHY",
+        "light.GRADIENT",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "TICKLING_L.json",
+      "task_id": "tickling_l",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.SHY",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "TICKLING_R.json",
+      "task_id": "tickling_r",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.SHY",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "TILT_HEAD_LISTEN.json",
+      "task_id": "TILT_HEAD_LISTEN",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "TWIST_BUTT.json",
+      "task_id": "dance",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.WINK",
+        "light.FIXEDCOLOR",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "WAKEUP.json",
+      "task_id": "WAKEUP",
+      "resources": [
+        "SCREEN",
+        "LEGS",
+        "LIGHT"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "WAVE.json",
+      "task_id": "WAVE",
+      "resources": [
+        "LIGHT",
+        "SCREEN",
+        "LEGS",
+        "HEAD"
+      ],
+      "tasks": [
+        "body.RL_ACTION_POLICY1",
+        "head.STREAM",
+        "emotion.HAPPY_10S",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    },
+    {
+      "file": "rotate_360.json",
+      "task_id": "rotate_360",
+      "resources": [
+        "LEGS"
+      ],
+      "tasks": [
+        "base_action.ROTATE",
+        "emotion.default",
+        "light.FIXEDCOLOR",
+        "speak.MACHINE_LANGUAGE"
+      ],
+      "execution_enabled": false,
+      "remaining": "Per-action start/end posture and exact task cancellation must be validated"
+    }
+  ]
+}

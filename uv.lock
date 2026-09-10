@@ -42,8 +42,8 @@ wheels = [
 ]
 
 [[package]]
-name = "dogos-memory"
-version = "0.3.0"
+name = "dogos"
+version = "0.4.0"
 source = { virtual = "." }
 dependencies = [
     { name = "pydantic" },

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light">
+    <title>Vbot 身份预览</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <div class="eyebrow">LOCAL IDENTITY PORT</div>
+        <h1>让这只狗认出<br>它是谁</h1>
+        <p>在本机浏览器生成并验证身份包。预览不会连接设备，也不会写入机械狗。</p>
+        <div class="status-row">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="service-status">正在检查本地服务…</span>
+        </div>
+      </header>
+
+      <form id="identity-form" novalidate>
+        <section class="card">
+          <div class="section-heading">
+            <span class="step">01</span>
+            <div>
+              <h2>选择身体</h2>
+              <p>使用稳定的小写标识绑定身份版本。</p>
+            </div>
+          </div>
+          <label for="dog-id">Dog ID</label>
+          <input id="dog-id" name="dog_id" required maxlength="64" pattern="[a-z0-9][a-z0-9_-]{0,63}" placeholder="dog_a" autocomplete="off" autocapitalize="none" spellcheck="false">
+          <div class="hint">小写字母、数字、下划线或连字符</div>
+        </section>
+
+        <section class="card">
+          <div class="section-heading">
+            <span class="step">02</span>
+            <div>
+              <h2>导入身份</h2>
+              <p>内容只保存在这台电脑的受管预览目录。</p>
+            </div>
+          </div>
+
+          <label for="soul">soul.md <strong>必需</strong></label>
+          <textarea id="soul" required placeholder="# Soul&#10;&#10;名字、价值观、性格和边界…" spellcheck="true"></textarea>
+          <div class="identity-boundary">
+            SOUL 中的名字会改变 Agent 如何介绍自己；它不会自动替换机器狗的声学唤醒词。
+          </div>
+
+          <details>
+            <summary>添加可选记忆文件</summary>
+            <div class="optional-fields">
+              <label for="user">user.md <span>可选</span></label>
+              <textarea id="user" placeholder="# User&#10;&#10;主人偏好与稳定资料…" spellcheck="true"></textarea>
+
+              <label for="memory">memory.md <span>可选</span></label>
+              <textarea id="memory" placeholder="# Memory&#10;&#10;经确认的长期事实…" spellcheck="true"></textarea>
+            </div>
+          </details>
+        </section>
+
+        <button id="preview-button" type="submit">
+          <span>生成本地预览</span>
+          <span aria-hidden="true">→</span>
+        </button>
+        <p class="safety-note">仅本机 dry-run · 不提供 Apply · 不连接设备</p>
+      </form>
+
+      <section id="result" class="card result" hidden aria-live="polite"></section>
+    </main>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
